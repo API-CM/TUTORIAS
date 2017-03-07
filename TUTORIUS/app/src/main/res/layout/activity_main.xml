@@ -50,4 +50,14 @@
         android:layout_below="@+id/uvus"
         android:layout_alignLeft="@+id/uvus"
         android:layout_alignStart="@+id/uvus" />
+
+    <Button
+        android:text="saltaConsultas"
+        android:onClick="pruebaLanzada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/remember_pass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:id="@+id/pruebas" />
 </RelativeLayout>
