@@ -31,15 +31,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:text="@string/remember_pass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:id="@+id/remember_pass"
-        android:layout_below="@+id/editText3"
-        android:layout_centerHorizontal="true" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,12 +43,20 @@
         android:layout_alignStart="@+id/uvus" />
 
     <Button
-        android:text="saltaConsultas"
-        android:onClick="pruebaLanzada"
+        android:text="@string/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/remember_pass"
+        android:id="@+id/login"
+        android:layout_below="@+id/editText3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        android:id="@+id/pruebas" />
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:text="@string/remember_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/remember_pass"
+        android:layout_below="@+id/login"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
