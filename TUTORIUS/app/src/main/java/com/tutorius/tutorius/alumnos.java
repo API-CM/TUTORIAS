@@ -40,12 +40,11 @@ public class alumnos extends AppCompatActivity {
         private LinearLayout page1;
         private LinearLayout page2;
         private LinearLayout page3;
-        private LinearLayout page4;
-        private final int[] titles = {R.string.page1, R.string.page2, R.string.page3, R.string.page4};
+        private final int[] titles = {R.string.page1, R.string.page2, R.string.page3};
 
         @Override
         public int getCount() {
-            return 4;
+            return 3;
         }
 
         @Override
@@ -71,19 +70,12 @@ public class alumnos extends AppCompatActivity {
                     }
                     page = page2;
                     break;
-                case 2:
+                default:
                     if (page3 == null) {
                         page3 = (LinearLayout) LayoutInflater.from(alumnos.this).inflate(R.layout
                                 .page_three, collection, false);
                     }
                     page = page3;
-                    break;
-                default:
-                    if (page4 == null) {
-                        page4 = (LinearLayout) LayoutInflater.from(alumnos.this).inflate(R.layout
-                                .page_four, collection, false);
-                    }
-                    page = page4;
                     break;
             }
 

@@ -4,8 +4,7 @@
     <string name="password">Contraseña</string>
     <string name="remember_pass">¿Olvidaste tu contraseña?</string>
     <string name="login">Entrar</string>
-    <string name="page1">Pag 1</string>
-    <string name="page2">Pag 2</string>
-    <string name="page3">Pag 3</string>
-    <string name="page4">Pag 4</string>
+    <string name="page1">Departamentos</string>
+    <string name="page2">Asignaturas</string>
+    <string name="page3">Profesores</string>
 </resources>
