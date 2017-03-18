@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         entrar.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this,alumnos.class);
+                Intent intent = new Intent(MainActivity.this,alumnoConsulta.class);
                 startActivity(intent);
             }
         });
