@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
-public class alumnos extends AppCompatActivity {
+public class Alumnos extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,21 +58,21 @@ public class alumnos extends AppCompatActivity {
             switch (position) {
                 case 0:
                     if (page1 == null) {
-                        page1 = (LinearLayout) LayoutInflater.from(alumnos.this).inflate(R.layout
+                        page1 = (LinearLayout) LayoutInflater.from(Alumnos.this).inflate(R.layout
                                 .departamento, collection, false);
                     }
                     page = page1;
                     break;
                 case 1:
                     if (page2 == null) {
-                        page2 = (LinearLayout) LayoutInflater.from(alumnos.this).inflate(R.layout
+                        page2 = (LinearLayout) LayoutInflater.from(Alumnos.this).inflate(R.layout
                                 .asignatura, collection, false);
                     }
                     page = page2;
                     break;
                 default:
                     if (page3 == null) {
-                        page3 = (LinearLayout) LayoutInflater.from(alumnos.this).inflate(R.layout
+                        page3 = (LinearLayout) LayoutInflater.from(Alumnos.this).inflate(R.layout
                                 .profesores, collection, false);
                     }
                     page = page3;

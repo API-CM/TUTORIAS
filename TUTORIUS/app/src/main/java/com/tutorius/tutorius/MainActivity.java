@@ -115,16 +115,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if (resultJSON=="1"){      // hay un alumno por lo tanto el login es correcto.
                             //PASAMOS A LA HOJA DE ALUMNOS
-                            //Intent intent = new Intent(MainActivity.this,alumnos.class);
+                            //Intent intent = new Intent(MainActivity.this,Alumnos.class);
                             //startActivity(intent);
-                            devuelve = "OK";
-                            Intent intent = new Intent(MainActivity.this,alumnos.class);
+                            devuelve = " ";
+                            Intent intent = new Intent(MainActivity.this,Alumnos.class);
                             startActivity(intent);
 
                               //      DEBERIAMOS PROBAR TAMBIEN EN LA TABLA DE PROFESORES PARA SABER SI ES UN PROFESOR Y ENTONCES PASARLO A LA PAGINA DE PROFESORES
 
                         }
                         else if (resultJSON=="2"){
+                            devuelve = " ";
+                            Intent intent = new Intent(MainActivity.this,Profesor.class);
+                            startActivity(intent);
+                        }
+                        else if (resultJSON=="3"){
+                            devuelve = respuestaJSON.getString("mensaje");
+                        }
+                        else if (resultJSON=="4"){
                             devuelve = respuestaJSON.getString("mensaje");
                         }
 
