@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             //PASAMOS A LA HOJA DE ALUMNOS
                             //Intent intent = new Intent(MainActivity.this,Alumnos.class);
                             //startActivity(intent);
-                            devuelve = "1";
+                            devuelve = " ";
                             Intent intent = new Intent(MainActivity.this,Alumnos.class);
                             startActivity(intent);
 
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         }
                         else if (resultIntJSON==2){
-                            devuelve = "2";
+                            devuelve = " ";
                             Intent intent = new Intent(MainActivity.this,Profesor.class);
                             startActivity(intent);
                         }
