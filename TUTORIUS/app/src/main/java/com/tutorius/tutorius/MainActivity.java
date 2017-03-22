@@ -23,7 +23,7 @@ import java.net.URL;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
+    //conexiones php --------
     Button entrar;
     EditText usuario;
     EditText password;
@@ -31,11 +31,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // IP de mi Url
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
+    String ASIGNATURAS="http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
     // Rutas de los Web Services
     String AUTENTICACION = IP + "/autenticacion.php";
+    String getASIGNATURAS=ASIGNATURAS+"getAsignaturas.php";
 
     WebService hiloconexion;
 
+    // ------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

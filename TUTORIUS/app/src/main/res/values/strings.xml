@@ -4,6 +4,7 @@
     <string name="password">Contraseña</string>
     <string name="remember_pass">¿Olvidaste tu contraseña?</string>
     <string name="login">Entrar</string>
+    <string name="buscar">Buscar</string>
     <string name="page1">Departamentos</string>
     <string name="page2">Asignaturas</string>
     <string name="page3">Profesores</string>
