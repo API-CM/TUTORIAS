@@ -36,20 +36,11 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/password"
         android:hint="@string/password"
         android:layout_below="@+id/uvus"
         android:layout_alignLeft="@+id/uvus"
         android:layout_alignStart="@+id/uvus" />
-
-    <Button
-        android:text="@string/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/login"
-        android:layout_below="@+id/editText3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp" />
 
     <TextView
         android:text="@string/remember_pass"
@@ -59,4 +50,20 @@
         android:id="@+id/remember_pass"
         android:layout_below="@+id/login"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/errores" />
+
+    <Button
+        android:text="@string/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/login"
+        android:layout_below="@+id/errores"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
