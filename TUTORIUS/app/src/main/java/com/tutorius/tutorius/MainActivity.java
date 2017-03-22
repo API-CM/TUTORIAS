@@ -116,26 +116,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         String resultJSON = respuestaJSON.getString("estado");   // estado es el nombre del campo en el JSON
 
-                        if (resultJSON=="1"){      // hay un alumno por lo tanto el login es correcto.
+                        int resultIntJSON = Integer.parseInt(resultJSON);
+
+                        if(resultIntJSON == 1){
+                        //if (resultJSON.contentEquals("1")){      // hay un alumno por lo tanto el login es correcto.
                             //PASAMOS A LA HOJA DE ALUMNOS
                             //Intent intent = new Intent(MainActivity.this,Alumnos.class);
                             //startActivity(intent);
-                            devuelve = " ";
+                            devuelve = "1";
                             Intent intent = new Intent(MainActivity.this,Alumnos.class);
                             startActivity(intent);
 
                               //      DEBERIAMOS PROBAR TAMBIEN EN LA TABLA DE PROFESORES PARA SABER SI ES UN PROFESOR Y ENTONCES PASARLO A LA PAGINA DE PROFESORES
 
                         }
-                        else if (resultJSON=="2"){
-                            devuelve = " ";
+                        else if (resultIntJSON==2){
+                            devuelve = "2";
                             Intent intent = new Intent(MainActivity.this,Profesor.class);
                             startActivity(intent);
                         }
-                        else if (resultJSON=="3"){
+                        else if (resultIntJSON==3){
                             devuelve = respuestaJSON.getString("mensaje");
                         }
-                        else if (resultJSON=="4"){
+                        else if (resultIntJSON==4){
                             devuelve = respuestaJSON.getString("mensaje");
                         }
 

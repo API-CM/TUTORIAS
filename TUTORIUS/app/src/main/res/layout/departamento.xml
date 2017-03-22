@@ -19,9 +19,21 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="28dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="40dp"
-            android:id="@+id/asignaturas" />
+            android:layout_marginLeft="29dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="41dp"
+            android:id="@+id/busquedadepar"
+            android:hint="@string/page1" />
+
+        <Button
+            android:text="@string/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnbusqdepar"
+            android:layout_alignTop="@+id/busquedadepar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="23dp"
+            android:layout_marginEnd="23dp" />
     </RelativeLayout>
 </LinearLayout>
