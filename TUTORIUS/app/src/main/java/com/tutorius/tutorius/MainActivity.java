@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText usuario;
     EditText password;
     TextView errores;
-
+    String user;
     // IP de mi Url
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
     String ASIGNATURAS="http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         entrar.setOnClickListener(this);
         errores = (TextView)findViewById(R.id.errores);
+        //Ocultamos el logo de loading
+        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
 
     }
@@ -57,11 +59,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.login:
-
+                //Mostramos el logo de loading
+                findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                user = usuario.getText().toString();
                 hiloconexion = new WebService();
                 String cadenallamada = AUTENTICACION + "?uvus_alumno=" + usuario.getText().toString() + "&password=" + password.getText().toString();
-                hiloconexion.execute(cadenallamada,"1");   // Parámetros que recibe doInBackground
-
+                hiloconexion.execute(cadenallamada,"1",user);   // Parámetros que recibe doInBackground
                 break;
             default:
 
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String cad = params[0];
             URL url = null; // Url de donde queremos obtener información
             String devuelve ="";
+            String user1 = params[2];
 
 
 
@@ -125,14 +129,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             //startActivity(intent);
                             devuelve = " ";
                             Intent intent = new Intent(MainActivity.this,Alumnos.class);
+                            Bundle b = new Bundle();
+                            b.putString("UVUS",user1);
+                            intent.putExtras(b);
                             startActivity(intent);
-
-                              //      DEBERIAMOS PROBAR TAMBIEN EN LA TABLA DE PROFESORES PARA SABER SI ES UN PROFESOR Y ENTONCES PASARLO A LA PAGINA DE PROFESORES
-
                         }
                         else if (resultIntJSON==2){
                             devuelve = " ";
-                            Intent intent = new Intent(MainActivity.this,Profesor.class);
+                            Intent intent = new Intent(MainActivity.this,AddAsignaturas.class);
+                            Bundle b = new Bundle();
+                            b.putString("UVUS",user1);
+                            intent.putExtras(b);
                             startActivity(intent);
                         }
                         else if (resultIntJSON==3){
@@ -166,6 +173,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(String s) {
             errores.setText(s);
+            //Ponemos el logo de cargando en modo invisible.
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             //super.onPostExecute(s);
         }
 

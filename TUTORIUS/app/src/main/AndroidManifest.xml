@@ -17,11 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Alumnos">
+        <activity android:name=".Alumnos"></activity>
+        <activity android:name=".Departamento" />
+        <activity android:name=".Profesor" />
+        <activity android:name=".AddAsignaturas">
 
         </activity>
-        <activity android:name=".Departamento" />
-        <activity android:name=".Profesor"></activity>
     </application>
 
 </manifest>

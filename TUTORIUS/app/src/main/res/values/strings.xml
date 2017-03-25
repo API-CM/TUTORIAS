@@ -9,4 +9,7 @@
     <string name="page2">Asignaturas</string>
     <string name="page3">Profesores</string>
     <string name="search">Buscar</string>
+    <string name="addsubject">Busca una asignatura</string>
+    <string name="add">Añadir</string>
+
 </resources>
