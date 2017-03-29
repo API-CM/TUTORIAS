@@ -7,4 +7,23 @@
     android:orientation="vertical"
     tools:context=".Asignatura">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Asignatura"
+        android:ems="10"
+        android:id="@+id/buscarAsignaturas" />
+
+    <Button
+        android:text="Buscar"
+        android:layout_width="188dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:id="@+id/buscar" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listViewAsignaturas" />
 </LinearLayout>
