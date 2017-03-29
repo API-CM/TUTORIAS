@@ -20,9 +20,8 @@
         <activity android:name=".Alumnos"></activity>
         <activity android:name=".Departamento" />
         <activity android:name=".Profesor" />
-        <activity android:name=".AddAsignaturas">
-
-        </activity>
+        <activity android:name=".AddAsignaturas"/>
+        <activity android:name=".Principal_alumno"></activity>
     </application>
 
 </manifest>
