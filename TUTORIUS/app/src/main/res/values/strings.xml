@@ -11,5 +11,13 @@
     <string name="alumno_name">Nombre de Alumno</string>
     <string name="addsubject">Busca una asignatura</string>
     <string name="add">Añadir</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    //Strings para las etiquetas de la Activity activity_profesor
+    <string name="tab1_profesor">Hoy</string>
+    <string name="tab2_profesor">Mañana</string>
+    <string name="tab3_profesor">Pasado mañana</string>
 
 </resources>
