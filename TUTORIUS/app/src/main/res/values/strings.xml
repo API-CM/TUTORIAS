@@ -11,5 +11,11 @@
     <string name="alumno_name">Nombre de Alumno</string>
     <string name="addsubject">Busca una asignatura</string>
     <string name="add">Añadir</string>
+    <string name="name">Nombre:</string>
+    <string name="email">Email:</string>
+    <string name="asignaturas">Asignaturas impartidas:</string>
+    <string name="horario">Horario de Tutorías:</string>
+    <string name="departamento">Departamento:</string>.
+    <string name="despacho">Despacho:</string>
 
 </resources>
