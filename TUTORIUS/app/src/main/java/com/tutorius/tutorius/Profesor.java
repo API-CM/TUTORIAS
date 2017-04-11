@@ -1,103 +1,74 @@
 package com.tutorius.tutorius;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.LinearLayout;
-import android.widget.TabHost;
+        import android.os.Bundle;
+        import android.support.design.widget.TabLayout;
+        import android.support.v4.app.Fragment;
+        import android.support.v4.app.FragmentManager;
+        import android.support.v4.app.FragmentPagerAdapter;
+        import android.support.v4.view.ViewPager;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.widget.Toolbar;
+
+        import java.util.ArrayList;
+        import java.util.List;
 
 public class Profesor extends AppCompatActivity {
+
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alumnos);
+        setContentView(R.layout.activity_profesor);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new Profesor.MainPageAdapter());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new AddPeople(), "Hoy");
+        adapter.addFragment(new ProfesoresManana(), "Mañana");
+        adapter.addFragment(new ProfesoresPasMan(), "Pasado Mañana");
+        viewPager.setAdapter(adapter);
+    }
 
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
 
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
 
-    class MainPageAdapter extends PagerAdapter {
-
-        private LinearLayout page1;
-        private LinearLayout page2;
-        private LinearLayout page3;
-        private final int[] titles = {R.string.tab1_profesor, R.string.tab2_profesor, R.string.tab3_profesor};
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
 
         @Override
         public int getCount() {
-            return 3;
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return getString(titles[position]);
+            return mFragmentTitleList.get(position);
         }
-
-        @Override
-        public Object instantiateItem(ViewGroup collection, int position) {
-            View page;
-            switch (position) {
-                case 0:
-                    if (page1 == null) {
-                        page1 = (LinearLayout) LayoutInflater.from(Profesor.this).inflate(R.layout
-                                .departamento, collection, false);
-                    }
-                    page = page1;
-                    break;
-                case 1:
-                    if (page2 == null) {
-                        page2 = (LinearLayout) LayoutInflater.from(Profesor.this).inflate(R.layout
-                                .asignatura, collection, false);
-                    }
-                    page = page2;
-                    break;
-                default:
-                    if (page3 == null) {
-                        page3 = (LinearLayout) LayoutInflater.from(Profesor.this).inflate(R.layout
-                                .profesores, collection, false);
-                    }
-                    page = page3;
-                    break;
-            }
-
-            collection.addView(page, 0);
-
-            return page;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup collection, int position, Object view) {
-            collection.removeView((View) view);
-        }
-
-
     }
-
 }
-

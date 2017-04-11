@@ -19,5 +19,8 @@
     <string name="tab1_profesor">Hoy</string>
     <string name="tab2_profesor">Mañana</string>
     <string name="tab3_profesor">Pasado mañana</string>
+    <string name="some_text">
+     Some North American Countries!
+ </string>
 
 </resources>
