@@ -3,15 +3,18 @@ package com.tutorius.tutorius;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
+
+
 
 
 public class AddAsignaturas extends Activity {
 
     String user;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +26,8 @@ public class AddAsignaturas extends Activity {
         user = b.getString("UVUS");
 
 
-
         String str[] = {"Circuitos","ADDA","Redes","Arquitectura"};
+
 
         AutoCompleteTextView t1 = (AutoCompleteTextView)
                 findViewById(R.id.autoCompleteTextView1);
@@ -34,6 +37,10 @@ public class AddAsignaturas extends Activity {
 
         t1.setThreshold(1);
         t1.setAdapter(adp);
+
+
+
+
     }
 /*
     public void onClick(View v) {

@@ -22,7 +22,10 @@
         <activity android:name=".Profesor" />
         <activity android:name=".AddAsignaturas" />
         <activity android:name=".Principal_alumno" />
-        <activity android:name=".ModificacionPerfilProfesor"></activity>
+        <activity android:name=".ModificacionPerfilProfesor" />
+        <activity android:name=".EditarPerfilProfesor" />
+        <activity android:name=".ModificarAsignaturas" />
+        <activity android:name=".ModificarHorario"></activity>
     </application>
 
 </manifest>

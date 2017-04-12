@@ -37,7 +37,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ModificacionPerfilProfesor extends AppCompatActivity {
+public class ModificacionPerfilProfesor extends AppCompatActivity implements View.OnClickListener{
 
     TextView nombre;
     TextView departamento;
@@ -46,11 +46,13 @@ public class ModificacionPerfilProfesor extends AppCompatActivity {
     TextView despacho;
     TextView asignaturas;
 
+    Button edit;
+
     private Context mContext;
     private Activity mActivity;
     private TextView mCLayout;
 
-    String user;
+
     String usuario;
     // IP de mi Url
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
@@ -70,6 +72,9 @@ public class ModificacionPerfilProfesor extends AppCompatActivity {
         horario = (TextView)findViewById(R.id.horario);
         despacho = (TextView)findViewById(R.id.despacho);
         asignaturas = (TextView) findViewById(R.id.asignaturas);
+        edit = (Button)findViewById(R.id.editar);
+
+        edit.setOnClickListener(this);
 
         mContext = getApplicationContext();
         mActivity = ModificacionPerfilProfesor.this;
@@ -102,6 +107,7 @@ public class ModificacionPerfilProfesor extends AppCompatActivity {
                             // Get the JSON array
                             JSONArray array = response.getJSONArray("profesor");
                             JSONArray array2 = response.getJSONArray("asignaturas");
+                            JSONArray array3 = response.getJSONArray("horario");
 
                             // Loop through the array elements
                             for(int i=0;i<array.length();i++){
@@ -135,6 +141,23 @@ public class ModificacionPerfilProfesor extends AppCompatActivity {
                                 asignaturas.append(asig2 + "\n");
 
                             }
+
+                            for(int i=0;i<array3.length();i++){
+                                // Get current json object
+                                JSONObject hora = array3.getJSONObject(i);
+
+                                String dia = hora.getString("DIA_SEMANA");
+                                String hora_inicio = hora.getString("HORA_INICIO");
+                                String hora_fin = hora.getString("HORA_FIN");
+                                // Display the formatted json data in text view
+                                //EL if es para evitar que el ultimo meta tambien un salto de linea.
+                                if(i!=array3.length()-1){
+                                    horario.append(dia + ": " + hora_inicio + " - " + hora_fin + "\n");
+                                }else{
+                                    horario.append(dia + ": " + hora_inicio + " - " + hora_fin);
+                                }
+
+                            }
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -156,6 +179,28 @@ public class ModificacionPerfilProfesor extends AppCompatActivity {
         // Add JsonObjectRequest to the RequestQueue
         requestQueue.add(jsonObjectRequest);
 
+    }
+
+
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.editar:
+                Intent intent = new Intent(ModificacionPerfilProfesor.this,EditarPerfilProfesor.class);
+                Bundle b = new Bundle();
+                b.putString("UVUS",usuario);
+                b.putString("NOMBRE",nombre.getText().toString());
+                b.putString("EMAIL",email.getText().toString());
+                b.putString("DEPARTAMENTO",departamento.getText().toString());
+                b.putString("DESPACHO",despacho.getText().toString());
+
+                intent.putExtras(b);
+                startActivity(intent);
+
+                break;
+            default:
+
+                break;
+        }
     }
 
 

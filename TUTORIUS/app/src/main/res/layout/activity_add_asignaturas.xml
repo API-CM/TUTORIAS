@@ -32,8 +32,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="213dp"
-        android:id="@+id/verasig"
+        android:id="@+id/errores"
         android:layout_below="@+id/buttonaddsubject"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonaddsubject"
+        android:layout_alignLeft="@+id/autoCompleteTextView1"
+        android:layout_alignStart="@+id/autoCompleteTextView1"
+        android:layout_marginTop="49dp"
+        android:id="@+id/data2" />
 
 </RelativeLayout>

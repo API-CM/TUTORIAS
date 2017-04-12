@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             //Intent intent = new Intent(MainActivity.this,Alumnos.class);
                             //startActivity(intent);
                             devuelve = " ";
-                            Intent intent = new Intent(MainActivity.this,Alumnos.class);
+                            Intent intent = new Intent(MainActivity.this,AddAsignaturas.class);
                             Bundle b = new Bundle();
                             b.putString("UVUS",user1);
                             intent.putExtras(b);

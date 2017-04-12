@@ -17,5 +17,17 @@
     <string name="horario">Horario de Tutorías:</string>
     <string name="departamento">Departamento:</string>.
     <string name="despacho">Despacho:</string>
+    <string name="editProfile">Editar perfil</string>
+    <string name="title_activity_editar_perfil_profesor">EditarPerfilProfesor</string>
+    <string name="update">Actualizar</string>
+    <string name="modificarhorario">Modificar Horario</string>
+    <string name="modificarasigs">Modificar Asignaturas</string>
+    <string name="addasig">SIGLAS ASIGNATURA</string>
+    <string name="addasignatura">Añadir una nueva asignatura:</string>
+    <string name="addhorario">Añadir una nueva franja de tutoria</string>
+    <string name="dia_semana">Día de la semana:</string>
+    <string name="hora_inicio">Hora comienzo:</string>
+    <string name="hora_fin">Hora fin:</string>
+
 
 </resources>
