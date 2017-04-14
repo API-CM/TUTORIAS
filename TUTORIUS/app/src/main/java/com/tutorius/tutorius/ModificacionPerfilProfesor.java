@@ -8,6 +8,9 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,6 +68,11 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificacion_perfil_profesor);
+
+        //cabecera
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //fin cabecera
 
         nombre = (TextView) findViewById(R.id.nombre);
         departamento = (TextView)findViewById(R.id.departamento);
@@ -180,6 +188,50 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
         requestQueue.add(jsonObjectRequest);
 
     }
+
+    //metodos para el menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+
+        switch(id) {
+
+            case R.id.action_settings_back:
+                Intent intent = new Intent(ModificacionPerfilProfesor.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_settings_home:
+                Intent intent2 = new Intent(ModificacionPerfilProfesor.this, MainActivity.class);
+                startActivity(intent2);
+                return true;
+
+            case R.id.action_settings_profile:
+                finish();
+                startActivity(getIntent());
+                return true;
+
+            case R.id.action_settings_out:
+                Intent intent4 = new Intent(ModificacionPerfilProfesor.this, MainActivity.class);
+                startActivity(intent4);
+                return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    //
 
 
     public void onClick(View v) {

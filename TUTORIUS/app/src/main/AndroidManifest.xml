@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Cabecera_profesor"></activity>
+        <activity
+            android:name=".Cabecera_alumno"
+            android:label="@string/title_activity_cabecera_alumno"
+            android:theme="@style/AppTheme"></activity>
         <activity android:name=".EditarPerfilProfesor" android:screenOrientation="portrait"/>
         <activity android:name=".ModificarAsignaturas" android:screenOrientation="portrait"/>
         <activity android:name=".ModificarHorario" android:screenOrientation="portrait"/>

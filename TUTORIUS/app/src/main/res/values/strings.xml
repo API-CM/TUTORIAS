@@ -17,6 +17,7 @@
     <string name="horario">Horario de Tutorías:</string>
     <string name="departamento">Departamento:</string>.
     <string name="despacho">Despacho:</string>
+    <string name="title_activity_cabecera_alumno">Cabecera_alumno</string>
     <string name="editProfile">Editar perfil</string>
     <string name="title_activity_editar_perfil_profesor">EditarPerfilProfesor</string>
     <string name="update">Actualizar</string>
