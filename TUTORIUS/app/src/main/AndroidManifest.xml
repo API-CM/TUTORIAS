@@ -18,20 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".EditarPerfilProfesor" />
-        <activity android:name=".ModificarAsignaturas" />
-        <activity android:name=".ModificarHorario"></activity>
-        <activity android:name=".Alumnos"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".EditarPerfilProfesor" android:screenOrientation="portrait"/>
+        <activity android:name=".ModificarAsignaturas" android:screenOrientation="portrait"/>
+        <activity android:name=".ModificarHorario" android:screenOrientation="portrait"/>
+        <activity android:name=".Alumnos" android:screenOrientation="portrait"/>
         <activity android:name=".Departamento" android:screenOrientation="portrait"/>
         <activity android:name=".Profesor" android:screenOrientation="portrait"/>
-        <activity android:name=".AddAsignaturas"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Principal_alumno"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ModificacionPerfilProfesor"
-            android:screenOrientation="portrait"></activity>
+        <activity android:name=".AddAsignaturas" android:screenOrientation="portrait"/>
+        <activity android:name=".Principal_alumno" android:screenOrientation="portrait"/>
+        <activity android:name=".ModificacionPerfilProfesor" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

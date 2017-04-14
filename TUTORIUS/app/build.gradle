@@ -27,7 +27,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.1'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.1.1'
-    compile project(':volley')
+    compile project(':volleyy')
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.github.snowdream.android:smartimageview:0.0.2'
 
