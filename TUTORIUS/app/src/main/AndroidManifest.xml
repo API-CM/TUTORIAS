@@ -10,22 +10,28 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Alumnos" />
-        <activity android:name=".Departamento" />
-        <activity android:name=".Profesor" />
-        <activity android:name=".AddAsignaturas" />
-        <activity android:name=".Principal_alumno" />
-        <activity android:name=".ModificacionPerfilProfesor" />
-        <activity android:name=".EditarPerfilProfesor" />
-        <activity android:name=".ModificarAsignaturas" />
-        <activity android:name=".ModificarHorario"></activity>
+        <activity android:name=".Cabecera_profesor"></activity>
+        <activity
+            android:name=".Cabecera_alumno"
+            android:label="@string/title_activity_cabecera_alumno"
+            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".EditarPerfilProfesor" android:screenOrientation="portrait"/>
+        <activity android:name=".ModificarAsignaturas" android:screenOrientation="portrait"/>
+        <activity android:name=".ModificarHorario" android:screenOrientation="portrait"/>
+        <activity android:name=".Alumnos" android:screenOrientation="portrait"/>
+        <activity android:name=".Departamento" android:screenOrientation="portrait"/>
+        <activity android:name=".Profesor" android:screenOrientation="portrait"/>
+        <activity android:name=".AddAsignaturas" android:screenOrientation="portrait"/>
+        <activity android:name=".Principal_alumno" android:screenOrientation="portrait"/>
+        <activity android:name=".ModificacionPerfilProfesor" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
