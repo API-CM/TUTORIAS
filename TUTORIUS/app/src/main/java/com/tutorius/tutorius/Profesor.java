@@ -37,7 +37,7 @@ public class Profesor extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new AddPeople(), "Hoy");
+        adapter.addFragment(new CitasHoyProfesor(), "Hoy");
         adapter.addFragment(new ProfesoresManana(), "Mañana");
         adapter.addFragment(new ProfesoresPasMan(), "Pasado Mañana");
         viewPager.setAdapter(adapter);

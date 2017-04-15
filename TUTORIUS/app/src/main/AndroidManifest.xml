@@ -22,16 +22,6 @@
         <activity android:name=".Profesor" />
         <activity android:name=".AddAsignaturas" />
         <activity android:name=".Principal_alumno" />
-        <activity android:name=".ProfesoresHoy"></activity>
-        <activity
-            android:name=".ListViewCheckboxes"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
