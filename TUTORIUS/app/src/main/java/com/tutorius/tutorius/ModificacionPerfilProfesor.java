@@ -157,7 +157,7 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
                             }
 
 
-                            hola(listaa);
+                            ponerenlistView(listaa);
 
 
 
@@ -211,7 +211,7 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
         return true;
     }
 
-    public void hola(String[] list){
+    public void ponerenlistView(String[] list){
 
         ArrayAdapter<String> adaptador =
                 new ArrayAdapter<String>(this,
