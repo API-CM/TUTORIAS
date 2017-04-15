@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -47,7 +48,8 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
     TextView email;
     TextView horario;
     TextView despacho;
-    TextView asignaturas;
+    ListView listaasigs;
+
 
     Button edit;
 
@@ -61,6 +63,8 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
     // Rutas de los Web Services
     String getProfesor=IP+"/getProfesores.php";
+
+    String[] listaa;
 
 
 
@@ -79,8 +83,8 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
         email = (TextView)findViewById(R.id.email);
         horario = (TextView)findViewById(R.id.horario);
         despacho = (TextView)findViewById(R.id.despacho);
-        asignaturas = (TextView) findViewById(R.id.asignaturas);
         edit = (Button)findViewById(R.id.editar);
+
 
         edit.setOnClickListener(this);
 
@@ -90,6 +94,7 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
 
         Bundle b = this.getIntent().getExtras();
         usuario = b.getString("UVUS");
+
 
 
         String cadenallamada = getProfesor + "?uvus_profesor=" + usuario;
@@ -139,16 +144,23 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
 
                             }
 
+                            listaa = new String[array2.length()];
                             for(int i=0;i<array2.length();i++){
                                 // Get current json object
                                 JSONObject asig = array2.getJSONObject(i);
 
-                                String asig2 = asig.getString("NOMBRE");
 
                                 // Display the formatted json data in text view
-                                asignaturas.append(asig2 + "\n");
+
+                                listaa[i] = asig.getString("NOMBRE") + " ";
 
                             }
+
+
+                            hola(listaa);
+
+
+
 
                             for(int i=0;i<array3.length();i++){
                                 // Get current json object
@@ -187,6 +199,8 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
         // Add JsonObjectRequest to the RequestQueue
         requestQueue.add(jsonObjectRequest);
 
+
+
     }
 
     //metodos para el menu
@@ -196,6 +210,19 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    public void hola(String[] list){
+
+        ArrayAdapter<String> adaptador =
+                new ArrayAdapter<String>(this,
+                        android.R.layout.simple_list_item_1, list);
+
+        listaasigs = (ListView)findViewById(R.id.listasig);
+
+        listaasigs.setAdapter(adaptador);
+    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

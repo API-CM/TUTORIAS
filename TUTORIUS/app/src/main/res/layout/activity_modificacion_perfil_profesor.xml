@@ -135,16 +135,6 @@
             android:layout_alignBottom="@+id/textView7" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView13"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="17dp"
-            android:paddingLeft="15dp"
-            android:id="@+id/asignaturas" />
-
-        <TextView
             android:text="@string/asignaturas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -153,15 +143,6 @@
             android:layout_below="@+id/horario"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/asignaturas"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="35dp"
-            android:id="@+id/listasig" />
 
         <Button
             android:text="@string/editProfile"
@@ -173,6 +154,14 @@
             android:layout_alignStart="@+id/imageView"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/listasig"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textView13" />
 
 
     </RelativeLayout>
