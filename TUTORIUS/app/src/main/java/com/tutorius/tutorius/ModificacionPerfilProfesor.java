@@ -3,6 +3,8 @@ package com.tutorius.tutorius;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -41,6 +45,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.R.attr.bitmap;
+
 public class ModificacionPerfilProfesor extends AppCompatActivity implements View.OnClickListener{
 
     TextView nombre;
@@ -50,12 +56,16 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
     TextView despacho;
     ListView listaasigs;
 
+    ImageView foto;
+
 
     Button edit;
 
     private Context mContext;
     private Activity mActivity;
     private TextView mCLayout;
+
+
 
 
     String usuario;
@@ -65,6 +75,7 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
     String getProfesor=IP+"/getProfesores.php";
 
     String[] listaa;
+
 
 
 
@@ -84,6 +95,10 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
         horario = (TextView)findViewById(R.id.horario);
         despacho = (TextView)findViewById(R.id.despacho);
         edit = (Button)findViewById(R.id.editar);
+        final Bitmap bitmap;
+
+        foto = (ImageView)findViewById(R.id.imageView);
+
 
 
         edit.setOnClickListener(this);
@@ -133,12 +148,33 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
                                 String mail = profesor.getString("EMAIL");
                                 String despa = profesor.getString("DESPACHO");
                                 String depar = profesor.getString("SIGLAS");
+                                String urlfoto = profesor.getString("FOTO_PERSONAL");
+
+
 
                                 // Display the formatted json data in text view
                                 nombre.setText(firstName +" " + lastName);
                                 email.setText(mail);
                                 despacho.setText(despa);
                                 departamento.setText(depar);
+
+                                String site = IP + "/img/" + urlfoto;
+
+                                if(urlfoto != null) {
+                                    RequestQueue colaPeticiones = Volley.newRequestQueue(mContext);
+                                    ImageRequest peticion = new ImageRequest(
+                                            site,
+                                            new Response.Listener<Bitmap>() {
+                                                @Override
+                                                public void onResponse(Bitmap bitmap) {
+                                                    foto.setImageBitmap(bitmap);
+                                                }
+                                            }, 0, 0, null, null);
+                                    colaPeticiones.add(peticion);
+                                }
+
+
+
 
 
 
