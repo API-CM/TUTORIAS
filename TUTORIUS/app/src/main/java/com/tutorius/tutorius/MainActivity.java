@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String user;
     // IP de mi Url
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
-
     // Rutas de los Web Services
     String AUTENTICACION = IP + "/autenticacion.php";
     String getASIGNATURAS=IP+"getAsignaturas.php";
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                         else if (resultIntJSON==2){
                             devuelve = " ";
-                            Intent intent = new Intent(MainActivity.this,ModificacionPerfilProfesor.class);
+                            Intent intent = new Intent(MainActivity.this,Profesor.class);
                             Bundle b = new Bundle();
                             b.putString("UVUS",user1);
                             intent.putExtras(b);

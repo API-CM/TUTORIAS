@@ -30,5 +30,17 @@
     <string name="hora_inicio">Hora comienzo:</string>
     <string name="hora_fin">Hora fin:</string>
 
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    //Strings para las etiquetas de la Activity activity_profesor
+    <string name="tab1_profesor">Hoy</string>
+    <string name="tab2_profesor">Mañana</string>
+    <string name="tab3_profesor">Pasado mañana</string>
+    <string name="some_text">
+     Some North American Countries!
+ </string>
+    <string name="check_toast">Seleccionado: </string>
 
 </resources>
