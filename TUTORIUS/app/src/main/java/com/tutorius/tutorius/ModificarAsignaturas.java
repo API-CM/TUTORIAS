@@ -148,6 +148,9 @@ public class ModificarAsignaturas extends AppCompatActivity implements View.OnCl
                 // Add JsonObjectRequest to the RequestQueue
                 requestQueue.add(jsonObjectRequest);
 
+                finish();
+                startActivity(getIntent());
+
                 break;
             case R.id.delete:
                 ArrayList<String> elegidas = new ArrayList<>();

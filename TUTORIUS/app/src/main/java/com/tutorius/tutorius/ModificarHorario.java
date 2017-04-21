@@ -159,6 +159,9 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                 // Add JsonObjectRequest to the RequestQueue
                 requestQueue.add(jsonObjectRequest);
 
+                finish();
+                startActivity(getIntent());
+
                 break;
             case R.id.delhorario:
                 ArrayList<String> elegidas = new ArrayList<>();
@@ -193,10 +196,12 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                         // Add JsonObjectRequest to the RequestQueue
                         requestQueue2.add(jsonObjectRequest2);
                     }
+
+                    finish();
+                    startActivity(getIntent());
                 }
 
-                finish();
-                startActivity(getIntent());
+
 
 
                 break;

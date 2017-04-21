@@ -121,4 +121,14 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
         }
     }
 
+
+    //EN CASO DE PULSAR EL BOTÓN ATRÁS DEL MÓVIL SE RECARGARA LA ACTIVITY DE MODICIACIONPERFILPROFESOR YA QUE PUEDE HABER CAMBIADO SU HORARIO O LAS ASIGNATURAS
+    public void onBackPressed (){
+        Intent intent4 = new Intent(EditarPerfilProfesor.this,ModificacionPerfilProfesor.class);
+        Bundle b4 = new Bundle();
+        b4.putString("UVUS",usuario);
+        intent4.putExtras(b4);
+        startActivity(intent4);
+    }
+
 }
