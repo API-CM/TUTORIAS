@@ -6,15 +6,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModificarHorario extends AppCompatActivity implements View.OnClickListener{
 
@@ -24,6 +32,10 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
     Spinner dia;
     Spinner hora_ini;
     Spinner hora_fi;
+    ListView lista_horario;
+    Button delete_horario;
+    List<Row> rows;
+    String[] listaa;
     private Context mContext;
 
     @Override
@@ -32,8 +44,10 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_modificar_horario);
 
         add = (Button)findViewById(R.id.add_franja);
+        delete_horario = (Button)findViewById(R.id.delhorario);
 
         add.setOnClickListener(this);
+        delete_horario.setOnClickListener(this);
 
         Bundle b = this.getIntent().getExtras();
         usuario = b.getString("UVUS");
@@ -52,6 +66,67 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
         hora_fi.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, hora));
 
 
+        rows = new ArrayList<Row>(30);
+
+        String cadenallamada = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getProfesores.php?uvus_profesor=" + usuario;
+
+        mContext = getApplicationContext();
+
+        RequestQueue requestQueue2 = Volley.newRequestQueue(mContext);
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(
+                Request.Method.GET,
+                cadenallamada,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+
+                        // Process the JSON
+                        try{
+                            // Get the JSON array
+                            JSONArray array = response.getJSONArray("horario");
+
+
+
+                            listaa = new String[array.length()];
+                            rows = new ArrayList<Row>();
+                            Row fila = null;
+                            for(int i=0;i<array.length();i++){
+                                // Get current json object
+                                JSONObject row = array.getJSONObject(i);
+                                fila = new Row();
+                                String dia = row.getString("DIA_SEMANA");
+                                String hora_ini = row.getString("HORA_INICIO");
+                                String hora_fin = row.getString("HORA_FIN");
+                                fila.setTitle(dia + " - " + hora_ini + " - " + hora_fin);
+
+
+                                // Display the formatted json data in text view
+
+                                rows.add(fila);
+
+                            }
+
+
+                            lista_horario= (ListView) findViewById(R.id.list_horario);
+
+
+                            lista_horario.setAdapter(new CustomArrayAdapter(mContext, rows));
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, null
+        );
+
+        // Add JsonObjectRequest to the RequestQueue
+        requestQueue2.add(jsonObjectRequest2);
 
 
     }
@@ -83,6 +158,51 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
 
                 // Add JsonObjectRequest to the RequestQueue
                 requestQueue.add(jsonObjectRequest);
+
+                finish();
+                startActivity(getIntent());
+
+                break;
+            case R.id.delhorario:
+                ArrayList<String> elegidas = new ArrayList<>();
+
+                for(int i=0;i<rows.size();i++){
+                    Row ro = rows.get(i);
+                    if(ro.isChecked()){
+                        elegidas.add(ro.getTitle());
+                    }
+                }
+
+                if(elegidas.size() != 0) {
+
+                    for (int i = 0; i < elegidas.size(); i++) {
+                        String[] split = elegidas.get(i).split(" - ");
+                        String del = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getDeleteHorario.php?uvus_profesor=" + usuario + "&dia_semana=" + split[0] + "&hora_inicio=" + split[1] + "&hora_fin=" + split[2];
+                        // Rutas de los Web Services
+
+
+                        mContext = getApplicationContext();
+
+                        RequestQueue requestQueue2 = Volley.newRequestQueue(mContext);
+
+                        // Initialize a new JsonObjectRequest instance
+                        JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(
+                                Request.Method.GET,
+                                del,
+                                null,
+                                null,null
+                        );
+
+                        // Add JsonObjectRequest to the RequestQueue
+                        requestQueue2.add(jsonObjectRequest2);
+                    }
+
+                    finish();
+                    startActivity(getIntent());
+                }
+
+
+
 
                 break;
             default:

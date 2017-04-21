@@ -25,6 +25,8 @@
         android:layout_alignBottom="@+id/checkBox"
         android:layout_toRightOf="@+id/checkBox"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="14dp"
         android:textColor="@android:color/black" />
+
 
 </RelativeLayout>
