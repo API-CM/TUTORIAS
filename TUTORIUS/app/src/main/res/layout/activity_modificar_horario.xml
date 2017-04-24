@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context="com.tutorius.tutorius.ModificarHorario">
 
+    <include layout="@layout/activity_cabecera_profesor"/>
+
     <TextView
         android:text="@string/addhorario"
         android:layout_width="match_parent"
@@ -15,7 +17,7 @@
         android:textSize="@dimen/activity_horizontal_margin"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
-/>
+    />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -91,7 +93,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/list_horario" />
 
     <Button
@@ -99,7 +101,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/delhorario"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_gravity="center"/>
 
 
