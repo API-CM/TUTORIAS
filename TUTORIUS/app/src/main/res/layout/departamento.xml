@@ -45,5 +45,6 @@
             android:layout_alignParentEnd="true"
             android:id="@+id/listViewDepartamento"
             android:divider="@android:drawable/button_onoff_indicator_off" />
+
     </RelativeLayout>
 </LinearLayout>

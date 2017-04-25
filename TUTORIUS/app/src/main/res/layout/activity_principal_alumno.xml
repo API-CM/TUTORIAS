@@ -8,32 +8,7 @@
     tools:context=".Principal_alumno"
     android:weightSum="1">
 
-    <TableLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="48dp">
-        <TableRow>
-            <Button
-                android:text="Home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button6" />
-            <TextView
-                android:text="@string/alumno_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-
-            <Button
-                android:text="Option"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:id="@+id/button7" />
-
-        </TableRow>
-
-    </TableLayout>
+    <include layout="@layout/activity_cabecera_profesor"/>
 
     <TableLayout
         android:layout_width="match_parent"

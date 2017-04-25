@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -47,6 +48,7 @@ import cz.msebera.android.httpclient.message.BufferedHeader;
 
 public class Departamento extends AppCompatActivity {
 
+
     ListView li;
     ArrayList nombresDept = new ArrayList();
     ArrayList siglasDept = new ArrayList();
@@ -59,6 +61,8 @@ public class Departamento extends AppCompatActivity {
         //listView Vistas--
         li = (ListView) findViewById(R.id.listViewDepartamento);
         getDepartamentos();
+
+
     }
 
     private void getDepartamentos() {
