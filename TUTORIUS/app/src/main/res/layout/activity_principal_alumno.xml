@@ -8,7 +8,7 @@
     tools:context=".Principal_alumno"
     android:weightSum="1">
 
-    <include layout="@layout/activity_cabecera_profesor"/>
+    <include layout="@layout/activity_cabecera_alumno"/>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@id/activity_main"
+            android:id="@+id/citas_alumno"
             android:layout_weight="2.88" />
 
     </TableLayout>
@@ -42,8 +42,8 @@
         <Button
             android:text="Consultar / Pedir cita"
             android:layout_width="wrap_content"
-            android:layout_height="84dp"
-            android:id="@+id/button2"
+            android:layout_height="60dp"
+            android:id="@+id/boton"
             android:layout_weight="1.24" />
 
     </LinearLayout>
