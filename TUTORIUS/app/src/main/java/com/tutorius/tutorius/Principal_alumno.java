@@ -96,15 +96,13 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
                                 String fecha = cita.getString("FECHA");
                                 String hora = cita.getString("HORA_INICIO");
                                 String id_reserva = cita.getString("ID_RESERVA");
-                             // String des = despa.getString("DESPACHO");
 
-                                //prueba 2
-                                String des2 = despa(id_reserva);
+
 
 
                                 // Display the formatted json data in text view
 
-                                listaa[i]=fecha + " " + hora + " " + des2;
+                                listaa[i]="ID-CITA: " + id_reserva + "  -  " + fecha + "  -  " + hora;
 
                             }
 
@@ -127,42 +125,7 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
 
 
 
-    public String despa (String id){
-        String cadenallamada2 =  IP + "/getDespachoCitas.php?id_reserva=" + id;
-        // Initialize a new RequestQueue instance
-        RequestQueue requestQueue2 = Volley.newRequestQueue(mContext);
 
-        // Initialize a new JsonObjectRequest instance
-        JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(
-                Request.Method.GET,
-                cadenallamada2,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // Do something with response
-                        //mTextView.setText(response.toString());
-
-                        // Process the JSON
-                        try{
-                            // Get the JSON array
-                            JSONArray array = response.getJSONArray("despacho");
-
-                            JSONObject despa = array.getJSONObject(0);
-                            despacho = despa.getString("prueba");
-
-
-
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-                },null
-        );
-        requestQueue2.add(jsonObjectRequest2);
-
-        return despacho;
-    }
 
 
     public void ponerenlistView(String[] list){
@@ -190,6 +153,8 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
 
                   Intent intent = new Intent(getApplicationContext(), Datos_cita.class);
                   Bundle b = new Bundle();
+                  b.putString("CITA",itemValue);
+                  b.putString("USUARIO",usuario);
                   intent.putExtras(b);
 
                   // Aquí pasaremos el parámetro de la intención creada previamente
