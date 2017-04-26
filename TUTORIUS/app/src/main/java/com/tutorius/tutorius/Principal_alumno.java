@@ -209,6 +209,9 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
 
         Intent intent = new Intent(Principal_alumno.this,Alumnos.class);
+        Bundle b1 = new Bundle();
+        b1.putString("UVUS",usuario);
+        intent.putExtras(b1);
         startActivity(intent);
 
     }
