@@ -271,13 +271,21 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
         switch(id) {
 
             case R.id.action_settings_back:
-                Intent intent = new Intent(ModificacionPerfilProfesor.this, MainActivity.class);
+               /* Intent intent = new Intent(ModificacionPerfilProfesor.this, MainActivity.class);
                 startActivity(intent);
+                return true;
+                */
+                finish();
+                startActivity(getIntent());
                 return true;
 
             case R.id.action_settings_home:
-                Intent intent2 = new Intent(ModificacionPerfilProfesor.this, MainActivity.class);
+            /*    Intent intent2 = new Intent(ModificacionPerfilProfesor.this, MainActivity.class);
                 startActivity(intent2);
+                return true;
+                */
+                finish();
+                startActivity(getIntent());
                 return true;
 
             case R.id.action_settings_profile:

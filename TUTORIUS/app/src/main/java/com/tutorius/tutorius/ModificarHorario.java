@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,8 +27,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ModificarHorario extends AppCompatActivity implements View.OnClickListener{
 
@@ -149,29 +156,58 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                 String b = horainicioSeleccionado();
                 String c = horafinSeleccionado();
 
-                String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
-                // Rutas de los Web Services
-                getAddHorario=IP+"/getAddHorario.php?uvus_profesor="+ usuario + "&hora_inicio=" + b + "&hora_fin=" + c + "&dia_semana=" + a;
+                DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
-                mContext = getApplicationContext();
 
-                RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
-                // Initialize a new JsonObjectRequest instance
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                        Request.Method.GET,
-                        getAddHorario,
-                        null,
-                        null,null
-                );
+                Date fechaInicio = null;
+                Date fechaFin = null;
 
-                // Add JsonObjectRequest to the RequestQueue
-                requestQueue.add(jsonObjectRequest);
 
-                finish();
-                startActivity(getIntent());
 
-                break;
+                try {
+
+                    fechaInicio = dateFormat.parse(b);
+                    fechaFin = dateFormat.parse(c);
+
+
+                } catch (ParseException e) {
+
+                    e.printStackTrace();
+
+                }
+                if (fechaFin.after(fechaInicio)) {
+
+
+                    String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
+                    // Rutas de los Web Services
+                    getAddHorario = IP + "/getAddHorario.php?uvus_profesor=" + usuario + "&hora_inicio=" + b + "&hora_fin=" + c + "&dia_semana=" + a;
+
+                    mContext = getApplicationContext();
+
+                    RequestQueue requestQueue = Volley.newRequestQueue(mContext);
+
+                    // Initialize a new JsonObjectRequest instance
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                            Request.Method.GET,
+                            getAddHorario,
+                            null,
+                            null, null
+                    );
+
+                    // Add JsonObjectRequest to the RequestQueue
+                    requestQueue.add(jsonObjectRequest);
+
+                    finish();
+                    startActivity(getIntent());
+
+                    break;
+                }else{
+                    Toast toast1 =
+                            Toast.makeText(getApplicationContext(),
+                                    "La hora final debe ser posterior a la hora de comienzo", Toast.LENGTH_SHORT);
+                    toast1.show();
+                }
             case R.id.delhorario:
                 ArrayList<String> elegidas = new ArrayList<>();
 

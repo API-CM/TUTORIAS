@@ -2,21 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_modificacion_perfil_profesor"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.tutorius.tutorius.ModificacionPerfilProfesor">
+    android:orientation="vertical"
+    tools:context="com.tutorius.tutorius.Cabecera_profesor">
 
-    <include layout="@layout/activity_cabecera_profesor"/>
+   <include layout="@layout/activity_cabecera_alumno"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:text="@string/datos_profesor"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/relative1"/>
+
+    </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/relative1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="50dp">
+        android:paddingTop="85dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,38 +113,6 @@
             android:layout_marginTop="11dp"
             android:id="@+id/textView9" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:id="@+id/despacho"
-            android:paddingLeft="15dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView9"
-            android:layout_alignLeft="@+id/email"
-            android:layout_alignStart="@+id/email" />
-        <TextView
-            android:text="@string/horario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/despacho"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="13dp"
-            android:id="@+id/hour"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/hour"
-            android:layout_alignLeft="@+id/despacho"
-            android:layout_alignStart="@+id/despacho"
-            android:layout_marginTop="11dp"
-            android:paddingLeft="15dp"
-            android:layout_alignParentLeft="true"
-            android:id="@+id/horario" />
-
         <ImageView
             android:layout_width="270px"
             android:layout_height="300px"
@@ -135,37 +123,75 @@
             android:layout_alignBottom="@+id/textView7" />
 
         <TextView
-            android:text="@string/asignaturas"
+            android:id="@+id/date"
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/textView6"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:text="hora"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/date"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="13dp" />
+
+        <TextView
+            android:id="@+id/hour"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/textView10"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:id="@+id/textView13"
-            android:layout_below="@+id/horario"
+            android:id="@+id/despacho"
+            android:paddingLeft="15dp"
+            android:layout_alignBaseline="@+id/textView9"
+            android:layout_alignBottom="@+id/textView9"
+            android:layout_toRightOf="@+id/textView5"
+            android:layout_toEndOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:text="@string/datos_cita"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/textView9"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="23dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:text="fecha"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="17dp"
+            android:layout_below="@+id/textView4"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <Button
-            android:text="@string/editProfile"
+            android:text="@string/eliminar_cita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editar"
-            android:layout_below="@+id/email"
-            android:layout_alignLeft="@+id/imageView"
-            android:layout_alignStart="@+id/imageView"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/listasig"
+            android:id="@+id/boton"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/textView13" />
+            android:layout_centerHorizontal="true" />
 
 
     </RelativeLayout>
 
 
-
 </RelativeLayout>
+
+
+
