@@ -1,59 +1,32 @@
 package com.tutorius.tutorius;
 
 import android.app.Activity;
-import android.app.Application;
-import android.app.ListActivity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Rect;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.github.snowdream.android.widget.SmartImage;
-import com.github.snowdream.android.widget.SmartImageView;
 import com.loopj.android.http.*;
-import com.github.snowdream.android.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.HttpEntity;
-import cz.msebera.android.httpclient.HttpResponse;
-import cz.msebera.android.httpclient.client.ClientProtocolException;
-import cz.msebera.android.httpclient.client.HttpClient;
-import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
-import cz.msebera.android.httpclient.message.BufferedHeader;
-
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class Departamento extends Fragment {
 
     ListView li;
+    Button btnDept;
+    EditText bsqDept;
     ArrayList nombresDept = new ArrayList();
     ArrayList siglasDept = new ArrayList();
     ArrayList rows;
@@ -72,6 +45,8 @@ public class Departamento extends Fragment {
 
         rootView = inflater.inflate(R.layout.departamento, container, false);
         li= (ListView)rootView.findViewById(R.id.listViewDepartamento); //buscas en el XML el id de dicho elemento listView
+        btnDept = (Button)rootView.findViewById(R.id.btnbusqdepar);
+        bsqDept=(EditText)rootView.findViewById(R.id.busquedadepar);
         rows = new ArrayList<Row>();
 
         mContext = getActivity().getApplicationContext();
@@ -79,14 +54,10 @@ public class Departamento extends Fragment {
         mCLayout = (TextView) rootView.findViewById(R.id.errores);
 
 
-
-
         Bundle b = getActivity().getIntent().getExtras();
         usuario = b.getString("UVUS");
 
         //String cadenallamada = getAlumno + "?uvus_profesor=" + usuario;
-
-
 
         // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
@@ -95,15 +66,33 @@ public class Departamento extends Fragment {
 
         getDepartamentos();
 
-        return rootView;
+        btnDept.setOnClickListener(new View.OnClickListener() { //botón para buscar valor
+            public void onClick(View arg0)
+            {
+                ArrayList<Row> rows2=new ArrayList<Row>();
+                for(int i=0;i<rows.size();i++) {
 
+                    Row r = (Row) rows.get(i);
+
+                    if ( r.getTitle().toLowerCase().contains(bsqDept.getText()) ||
+                            r.getSubtitle().toLowerCase().contains(bsqDept.getText())  ||
+                            r.getTitle().contains(bsqDept.getText()) ||
+                            r.getSubtitle().contains(bsqDept.getText()) ) {
+                        rows2.add(r);
+                        li.setAdapter(new CustomArrayAdapterDept(getContext(), rows2));
+                    }
+                }
+            }
+        });
+
+        return rootView;
 
     }
 
     private void getDepartamentos() {
         nombresDept.clear();
         siglasDept.clear();
-
+        rows.clear();
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getDeparts.php", new AsyncHttpResponseHandler() {
@@ -113,8 +102,6 @@ public class Departamento extends Fragment {
                     try {
                         JSONArray jsonArray = new JSONArray(new String(responseBody));
 
-
-
                         Row fila = null;
                         for(int i=0;i<jsonArray.length();i++){
                             // Get current json object
@@ -122,7 +109,6 @@ public class Departamento extends Fragment {
                             fila = new Row();
                             fila.setTitle(row.getString("NOMBRE") + " ");
                             fila.setSubtitle(row.getString("SIGLAS") + " ");
-
 
                             // Display the formatted json data in text view
 

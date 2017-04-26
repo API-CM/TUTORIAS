@@ -31,7 +31,8 @@ public class Asignatura extends Fragment {
     ArrayList nombresAsig = new ArrayList();
     ArrayList siglasAsig = new ArrayList();
     ArrayList rows;
-
+    Button btnAsig;
+    EditText bsqAsig;
     View rootView;
     String usuario;
 
@@ -47,6 +48,8 @@ public class Asignatura extends Fragment {
         rootView = inflater.inflate(R.layout.asignatura, container, false);
         li= (ListView)rootView.findViewById(R.id.listViewAsig); //buscas en el XML el id de dicho elemento listView
         rows = new ArrayList<Row>();
+        btnAsig=(Button)rootView.findViewById(R.id.btnbusqasig);
+        bsqAsig=(EditText)rootView.findViewById(R.id.busquedaasig);
 
         mContext = getActivity().getApplicationContext();
         mActivity = getActivity();
@@ -65,13 +68,32 @@ public class Asignatura extends Fragment {
 
         getAsignaturas();
 
+        btnAsig.setOnClickListener(new View.OnClickListener() { //botón para buscar valor
+            public void onClick(View arg0)
+            {
+                ArrayList<Row> rows2=new ArrayList<Row>();
+                for(int i=0;i<rows.size();i++) {
+
+                    Row r = (Row) rows.get(i);
+
+                    if ( r.getTitle().contains(bsqAsig.getText()) || r.getSubtitle().contains(bsqAsig.getText()) ||
+                        r.getTitle().toLowerCase().contains(bsqAsig.getText()) ||
+                            r.getSubtitle().toLowerCase().contains(bsqAsig.getText()) ) {
+                        rows2.add(r);
+                        li.setAdapter(new CustomArrayAdapterDept(getContext(), rows2));
+                    }
+                }
+            }
+        });
+
+
         return rootView;
     }
 
     private void getAsignaturas() {
         nombresAsig.clear();
         siglasAsig.clear();
-
+        rows.clear();
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getAsignaturas.php", new AsyncHttpResponseHandler() {

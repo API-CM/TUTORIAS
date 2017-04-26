@@ -31,6 +31,8 @@ public class Profesores extends Fragment {
     ArrayList nombresProfs = new ArrayList();
     ArrayList deptProfs = new ArrayList();
     ArrayList rows;
+    Button btnProf;
+    EditText bsqProf;
 
     View rootView;
     String usuario;
@@ -47,6 +49,8 @@ public class Profesores extends Fragment {
         rootView = inflater.inflate(R.layout.profesores, container, false);
         li= (ListView)rootView.findViewById(R.id.listViewProf); //buscas en el XML el id de dicho elemento listView
         rows = new ArrayList<Row>();
+        btnProf=(Button)rootView.findViewById(R.id.btnbusqprof);
+        bsqProf=(EditText)rootView.findViewById(R.id.busquedaprof);
 
         mContext = getActivity().getApplicationContext();
         mActivity = getActivity();
@@ -64,6 +68,24 @@ public class Profesores extends Fragment {
         // setContentView(R.layout.departamento);
 
         getProfesores();
+
+        btnProf.setOnClickListener(new View.OnClickListener() { //botón para buscar valor
+            public void onClick(View arg0)
+            {
+                ArrayList<Row> rows2=new ArrayList<Row>();
+                for(int i=0;i<rows.size();i++) {
+
+                    Row r = (Row) rows.get(i);
+
+                    if ( r.getTitle().contains(bsqProf.getText()) || r.getSubtitle().contains(bsqProf.getText()) ||
+                            r.getTitle().toLowerCase().contains(bsqProf.getText()) ||
+                            r.getSubtitle().toLowerCase().contains(bsqProf.getText()) ) {
+                        rows2.add(r);
+                        li.setAdapter(new CustomArrayAdapterDept(getContext(), rows2));
+                    }
+                }
+            }
+        });
 
         return rootView;
     }
