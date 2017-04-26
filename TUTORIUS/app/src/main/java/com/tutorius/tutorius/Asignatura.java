@@ -1,17 +1,113 @@
 package com.tutorius.tutorius;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
-public class Asignatura extends AppCompatActivity {
-        
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
+
+public class Asignatura extends Fragment {
+    ListView li;
+    ArrayList nombresAsig = new ArrayList();
+    ArrayList siglasAsig = new ArrayList();
+    ArrayList rows;
+
+    View rootView;
+    String usuario;
+
+    private Context mContext;
+    private Activity mActivity;
+    private TextView mCLayout;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.asignatura);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        // super.onCreate(savedInstanceState);
+
+        rootView = inflater.inflate(R.layout.asignatura, container, false);
+        li= (ListView)rootView.findViewById(R.id.listViewAsig); //buscas en el XML el id de dicho elemento listView
+        rows = new ArrayList<Row>();
+
+        mContext = getActivity().getApplicationContext();
+        mActivity = getActivity();
+        mCLayout = (TextView) rootView.findViewById(R.id.errores);
+
+        Bundle b = getActivity().getIntent().getExtras();
+        usuario = b.getString("UVUS");
+
+        //String cadenallamada = getAlumno + "?uvus_profesor=" + usuario;
+
+
+        // Initialize a new RequestQueue instance
+        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
+
+        // setContentView(R.layout.departamento);
+
+        getAsignaturas();
+
+        return rootView;
+    }
+
+    private void getAsignaturas() {
+        nombresAsig.clear();
+        siglasAsig.clear();
+
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get("http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getAsignaturas.php", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    try {
+                        JSONArray jsonArray = new JSONArray(new String(responseBody));
+
+                        Row fila = null;
+                        for(int i=0;i<jsonArray.length();i++){
+                            // Get current json object
+                            JSONObject row = jsonArray.getJSONObject(i);
+                            fila = new Row();
+                            fila.setTitle(row.getString("NOMBRE") + " ");
+                            fila.setSubtitle(row.getString("SIGLAS") + " ");
+
+
+                            // Display the formatted json data in text view
+
+                            rows.add(fila);
+
+                        }
+
+                        li.setAdapter(new CustomArrayAdapterDept(getContext(),rows));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+
     }
 }

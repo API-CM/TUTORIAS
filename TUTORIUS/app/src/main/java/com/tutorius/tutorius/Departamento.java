@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.github.snowdream.android.widget.SmartImage;
 import com.github.snowdream.android.widget.SmartImageView;
 import com.loopj.android.http.*;
@@ -46,21 +49,53 @@ import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import cz.msebera.android.httpclient.message.BufferedHeader;
 
-public class Departamento extends AppCompatActivity {
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
+public class Departamento extends Fragment {
 
     ListView li;
     ArrayList nombresDept = new ArrayList();
     ArrayList siglasDept = new ArrayList();
+    ArrayList rows;
 
+    View rootView;
+    String usuario;
+
+    private Context mContext;
+    private Activity mActivity;
+    private TextView mCLayout;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.departamento);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        //listView Vistas--
-        li = (ListView) findViewById(R.id.listViewDepartamento);
+       // super.onCreate(savedInstanceState);
+
+        rootView = inflater.inflate(R.layout.departamento, container, false);
+        li= (ListView)rootView.findViewById(R.id.listViewDepartamento); //buscas en el XML el id de dicho elemento listView
+        rows = new ArrayList<Row>();
+
+        mContext = getActivity().getApplicationContext();
+        mActivity = getActivity();
+        mCLayout = (TextView) rootView.findViewById(R.id.errores);
+
+
+
+
+        Bundle b = getActivity().getIntent().getExtras();
+        usuario = b.getString("UVUS");
+
+        //String cadenallamada = getAlumno + "?uvus_profesor=" + usuario;
+
+
+
+        // Initialize a new RequestQueue instance
+        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
+
+       // setContentView(R.layout.departamento);
+
         getDepartamentos();
+
+        return rootView;
 
 
     }
@@ -78,12 +113,24 @@ public class Departamento extends AppCompatActivity {
                     try {
                         JSONArray jsonArray = new JSONArray(new String(responseBody));
 
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            nombresDept.add(jsonArray.getJSONObject(i).getString("NOMBRE"));
-                            siglasDept.add(jsonArray.getJSONObject(i).getString("SIGLAS"));
+
+
+                        Row fila = null;
+                        for(int i=0;i<jsonArray.length();i++){
+                            // Get current json object
+                            JSONObject row = jsonArray.getJSONObject(i);
+                            fila = new Row();
+                            fila.setTitle(row.getString("NOMBRE") + " ");
+                            fila.setSubtitle(row.getString("SIGLAS") + " ");
+
+
+                            // Display the formatted json data in text view
+
+                            rows.add(fila);
+
                         }
 
-                        li.setAdapter(new ImagenAdapter(getApplicationContext()));
+                        li.setAdapter(new CustomArrayAdapterDept(getContext(),rows));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -97,50 +144,4 @@ public class Departamento extends AppCompatActivity {
         });
 
     }
-
-    private class ImagenAdapter extends BaseAdapter {
-        Context contexto;
-        LayoutInflater layoutInflater;
-        SmartImageView smartImagenView;
-        TextView nombreDept, siglaDept;
-
-        public ImagenAdapter(Context applicationContext) {
-            this.contexto = applicationContext;
-            layoutInflater = (LayoutInflater) contexto.getSystemService(LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getCount() {
-            return nombresDept.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return position;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            ViewGroup viewGroup=(ViewGroup)layoutInflater.inflate(R.layout.departamento_item,null);
-            smartImagenView=(SmartImageView)viewGroup.findViewById(R.id.imagen2);
-            nombreDept=(TextView)viewGroup.findViewById(R.id.nombreDept);
-            siglaDept=(TextView)viewGroup.findViewById(R.id.siglaDept);
-
-            //String urlFinal=""+imagen.get(position).toString;
-            //Rect rect=new Rect(smartImagenView.getLeft(),smartImagenView.getTop(),smartImagenView.getRight(),smartImagenView.getBottom())
-            //smartImagenView.setImageUrl(urlFinal,rect);
-
-            nombreDept.setText(nombresDept.get(position).toString());
-            siglaDept.setText(siglasDept.get(position).toString());
-
-            return viewGroup;
-        }
-    }
-
 }
