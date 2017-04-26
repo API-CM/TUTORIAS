@@ -37,6 +37,7 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
     String fecha;
     String hora;
     String id;
+    String cancel;
 
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
 
@@ -50,6 +51,7 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
     TextView email1;
     TextView despacho1;
     ImageView foto1;
+    TextView fcancelado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
         email1 = (TextView)findViewById(R.id.email);
         despacho1 = (TextView)findViewById(R.id.despacho);
         foto1 = (ImageView)findViewById(R.id.imageView);
+        fcancelado = (TextView)findViewById(R.id.cancelado);
 
 
         //cabecera
@@ -75,9 +78,17 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
 
         String aux[] = cita.split("  -  ");
         String aux2[] = aux[0].split(" ");
+        String aux3[] = aux[2].split(" ");
 
         fecha = aux[1].trim();
-        hora = aux[2].trim();
+        hora = aux3[0].trim();
+
+        if(aux3.length >= 2) {
+            cancel = aux3[1].trim();
+        }else{
+            cancel = "";
+        }
+
         id=aux2[1];
 
         //----------------------peticion----------------------
@@ -166,6 +177,7 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
 
         faux.setText(fecha);
         haux.setText(hora);
+        fcancelado.setText(cancel);
 
         boton = (Button) findViewById(R.id.boton);
 
@@ -226,7 +238,29 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
 
     public void onClick(View v) {
 
-        Intent intent = new Intent(Datos_cita.this,MainActivity.class);
+
+        String del = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getDeleteReserva.php?id_reserva=" + id;
+        // Rutas de los Web Services
+
+        mContext = getApplicationContext();
+
+        RequestQueue requestQueue2 = Volley.newRequestQueue(mContext);
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(
+                Request.Method.GET,
+                del,
+                null,
+                null,null
+        );
+
+        // Add JsonObjectRequest to the RequestQueue
+        requestQueue2.add(jsonObjectRequest2);
+
+        Intent intent = new Intent(Datos_cita.this,Principal_alumno.class);
+        Bundle b = new Bundle();
+        b.putString("UVUS",usuario);
+        intent.putExtras(b);
         startActivity(intent);
 
     }

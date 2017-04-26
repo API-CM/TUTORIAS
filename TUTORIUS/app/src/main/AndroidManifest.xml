@@ -53,7 +53,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Datos_cita"
-            android:label="@string/title_activity_datos_cita"
             android:theme="@style/AppTheme"></activity>
     </application>
 

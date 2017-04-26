@@ -96,13 +96,14 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
                                 String fecha = cita.getString("FECHA");
                                 String hora = cita.getString("HORA_INICIO");
                                 String id_reserva = cita.getString("ID_RESERVA");
-
-
-
+                                String cancelado = cita.getString("CANCELADA");
 
                                 // Display the formatted json data in text view
+                                if(!(cancelado.equals("CANCELADA"))){
+                                    cancelado=" ";
+                                }
 
-                                listaa[i]="ID-CITA: " + id_reserva + "  -  " + fecha + "  -  " + hora;
+                                listaa[i]="ID-CITA: " + id_reserva + "  -  " + fecha + "  -  " + hora + " " + cancelado;
 
                             }
 
