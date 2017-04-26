@@ -24,14 +24,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/siglaDept"
+                android:id="@+id/siglaAsig"
                 android:textSize="21sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/nombreDept"
+                android:id="@+id/nombreAsig"
                 android:textSize="26sp" />
         </LinearLayout>
 

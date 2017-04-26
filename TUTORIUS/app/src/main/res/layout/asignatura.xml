@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,23 +7,34 @@
     android:orientation="vertical"
     tools:context=".Asignatura">
 
+    <Button
+        android:text="@string/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnbusqasig"
+        android:layout_above="@+id/listViewAsig"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Asignatura"
         android:ems="10"
-        android:id="@+id/buscarAsignaturas" />
-
-    <Button
-        android:text="Buscar"
-        android:layout_width="188dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:id="@+id/buscar" />
+        android:layout_marginTop="21dp"
+        android:id="@+id/busquedaasig"
+        android:hint="Asignatura"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listViewAsignaturas" />
-</LinearLayout>
+        android:id="@+id/listViewAsig"
+        android:divider="@android:drawable/button_onoff_indicator_off"
+        android:layout_marginTop="41dp"
+        android:layout_below="@+id/busquedaasig"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
