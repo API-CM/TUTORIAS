@@ -47,11 +47,9 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
     TextView faux;
     TextView haux;
     TextView nombre1;
-    TextView departamento1;
     TextView email1;
     TextView despacho1;
     ImageView foto1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +59,6 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
         faux = (TextView)findViewById(R.id.date);
         haux = (TextView)findViewById(R.id.hour);
         nombre1 = (TextView) findViewById(R.id.nombre);
-        departamento1 = (TextView)findViewById(R.id.departamento);
         email1 = (TextView)findViewById(R.id.email);
         despacho1 = (TextView)findViewById(R.id.despacho);
         foto1 = (ImageView)findViewById(R.id.imageView);
@@ -120,14 +117,13 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
                                 String lastName = profesor.getString("APELLIDO1");
                                 String mail = profesor.getString("EMAIL");
                                 String despa = profesor.getString("DESPACHO");
-                                String depar = profesor.getString("SIGLAS");
                                 String urlfoto = profesor.getString("FOTO_PERSONAL");
 
 
                                 // Display the formatted json data in text view
                                 nombre1.setText(firstName + " " + lastName);
                                 despacho1.setText(despa);
-                                departamento1.setText(depar);
+                                email1.setText(mail);
 
                                 String site = IP + "/img/" + urlfoto;
 
