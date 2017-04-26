@@ -103,21 +103,19 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
 
 
                                 // Display the formatted json data in text view
-                                listaa[i] = fecha + " " + hora + " " + des2;
+
+                                listaa[i]=fecha + " " + hora + " " + des2;
 
                             }
 
-
                             ponerenlistView(listaa);
-
-
-
-
 
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
                     }
+
+
                 },null
         );
 
@@ -151,7 +149,7 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
                             JSONArray array = response.getJSONArray("despacho");
 
                             JSONObject despa = array.getJSONObject(0);
-                            despacho = despa.getString("DESPACHO");
+                            despacho = despa.getString("prueba");
 
 
 
@@ -165,7 +163,6 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
 
         return despacho;
     }
-
 
 
     public void ponerenlistView(String[] list){
@@ -190,7 +187,10 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
                   String itemValue = (String) listacitas.getItemAtPosition(position);
 
                   //Con el fin de empezar a mostrar una nueva actividad lo que necesitamos es una intención
-                  Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                  Intent intent = new Intent(getApplicationContext(), Datos_cita.class);
+                  Bundle b = new Bundle();
+                  intent.putExtras(b);
 
                   // Aquí pasaremos el parámetro de la intención creada previamente
                   startActivity(intent);
