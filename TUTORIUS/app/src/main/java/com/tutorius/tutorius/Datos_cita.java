@@ -34,6 +34,7 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
     String cita;
     String usuario;
     Button boton;
+    Button pasar;
     String fecha;
     String hora;
     String id;
@@ -179,9 +180,13 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
         haux.setText(hora);
         fcancelado.setText(cancel);
 
-        boton = (Button) findViewById(R.id.boton);
+        boton = (Button)findViewById(R.id.delete);
 
         boton.setOnClickListener(this);
+
+        //PARA PASAR A LA PARTE DE ENRIQUE Y ALVARO SOLO ES TEMPORAL
+        pasar = (Button) findViewById(R.id.olakase);
+        pasar.setOnClickListener(this);
 
 
     }
@@ -238,31 +243,46 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
 
     public void onClick(View v) {
 
+        switch (v.getId()) {
+            case R.id.delete:
+                String del = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getDeleteReserva.php?id_reserva=" + id;
+                // Rutas de los Web Services
 
-        String del = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getDeleteReserva.php?id_reserva=" + id;
-        // Rutas de los Web Services
+                mContext = getApplicationContext();
 
-        mContext = getApplicationContext();
+                RequestQueue requestQueue2 = Volley.newRequestQueue(mContext);
 
-        RequestQueue requestQueue2 = Volley.newRequestQueue(mContext);
+                // Initialize a new JsonObjectRequest instance
+                JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(
+                        Request.Method.GET,
+                        del,
+                        null,
+                        null, null
+                );
 
-        // Initialize a new JsonObjectRequest instance
-        JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(
-                Request.Method.GET,
-                del,
-                null,
-                null,null
-        );
+                // Add JsonObjectRequest to the RequestQueue
+                requestQueue2.add(jsonObjectRequest2);
 
-        // Add JsonObjectRequest to the RequestQueue
-        requestQueue2.add(jsonObjectRequest2);
+                Intent intent = new Intent(Datos_cita.this, Principal_alumno.class);
+                Bundle b = new Bundle();
+                b.putString("UVUS", usuario);
+                intent.putExtras(b);
+                startActivity(intent);
+                break;
 
-        Intent intent = new Intent(Datos_cita.this,Principal_alumno.class);
-        Bundle b = new Bundle();
-        b.putString("UVUS",usuario);
-        intent.putExtras(b);
-        startActivity(intent);
+            case R.id.olakase:
+                Intent intent2 = new Intent(Datos_cita.this, Pedir_cita.class);
+                Bundle b1 = new Bundle();
+                b1.putString("UVUS", usuario);
+                b1.putString("UVUS_PROFESOR", "profesor1");
+                intent2.putExtras(b1);
+                startActivity(intent2);
 
+                break;
+            default:
+
+                break;
+        }
     }
 
 }
