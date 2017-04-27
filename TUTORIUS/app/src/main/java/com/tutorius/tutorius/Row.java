@@ -1,14 +1,13 @@
 package com.tutorius.tutorius;
-/**
- *
- * @author danielme.com
- *
- */
+
+
 public class Row
 {
     private String title;
 
     private String subtitle;
+
+    private String id;  //agregado por antonio
 
     private boolean checked;
 
@@ -31,6 +30,9 @@ public class Row
     {
         this.subtitle = subtitle;
     }
+
+    public String getId(){return id;}   //agregado ---
+    public void setId(String id){this.id=id;}    //agregado ---
 
     public boolean isChecked()
     {

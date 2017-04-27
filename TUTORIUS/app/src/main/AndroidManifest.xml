@@ -52,8 +52,12 @@
             android:name=".ModificacionPerfilProfesor"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ListViewDept"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Datos_cita"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

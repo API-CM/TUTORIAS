@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,7 +23,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 
-public class Departamento extends Fragment {
+public class Departamento extends Fragment implements View.OnClickListener{
 
     ListView li;
     Button btnDept;
@@ -30,6 +31,7 @@ public class Departamento extends Fragment {
     ArrayList nombresDept = new ArrayList();
     ArrayList siglasDept = new ArrayList();
     ArrayList rows;
+    ArrayList recogeDatos;  //PARA EL ID
 
     View rootView;
     String usuario;
@@ -64,11 +66,12 @@ public class Departamento extends Fragment {
 
        // setContentView(R.layout.departamento);
 
-        getDepartamentos();
+        getDepartamentos();     //carga el listView
+
 
         btnDept.setOnClickListener(new View.OnClickListener() { //botón para buscar valor
             public void onClick(View arg0)
-            {
+            {       //busquedas en el listView
                 ArrayList<Row> rows2=new ArrayList<Row>();
                 for(int i=0;i<rows.size();i++) {
 
@@ -85,8 +88,38 @@ public class Departamento extends Fragment {
             }
         });
 
-        return rootView;
+        li.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // La posición donde se hace clic en el elemento de lista se obtiene de la
+                // la posición de parámetro de la vista de lista de Android
+
+                //obtengo el valor del string del elemento donde se hizo clic
+                //String itemValue = (String) li.getItemAtPosition(position);
+                Row r= (Row) li.getItemAtPosition(position);
+                String pasar=null;
+
+                for(int k=0;k<rows.size();k++){
+                    Row r2=(Row)rows.get(k);
+
+                    if(r.getSubtitle().contains(r2.getSubtitle())){
+                        pasar=r2.getId();
+                    }
+                }
+                //Con el fin de empezar a mostrar una nueva actividad lo que necesitamos es una intención
+
+                Intent intent = new Intent(getActivity(), ListViewDept.class);
+                Bundle b = new Bundle();
+                b.putString("ID",pasar);  //siglas del departamento
+                b.putString("USUARIO",usuario);
+                intent.putExtras(b);
+
+                // Aquí pasaremos el parámetro de la intención creada previamente
+                startActivity(intent);
+            }
+        });
+
+        return rootView;
     }
 
     private void getDepartamentos() {
@@ -103,17 +136,20 @@ public class Departamento extends Fragment {
                         JSONArray jsonArray = new JSONArray(new String(responseBody));
 
                         Row fila = null;
+
                         for(int i=0;i<jsonArray.length();i++){
                             // Get current json object
                             JSONObject row = jsonArray.getJSONObject(i);
                             fila = new Row();
+
                             fila.setTitle(row.getString("NOMBRE") + " ");
                             fila.setSubtitle(row.getString("SIGLAS") + " ");
+                            fila.setId(row.getString("ID_DEPARTAMENTO"));
 
                             // Display the formatted json data in text view
 
                             rows.add(fila);
-
+//                            recogeDatos.add(fila2);
                         }
 
                         li.setAdapter(new CustomArrayAdapterDept(getContext(),rows));
@@ -129,5 +165,14 @@ public class Departamento extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getActivity(),ListViewDept.class);
+        Bundle b1 = new Bundle();
+        b1.putString("UVUS",usuario);
+        intent.putExtras(b1);
+        startActivity(intent);
     }
 }
