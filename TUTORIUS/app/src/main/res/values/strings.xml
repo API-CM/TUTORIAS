@@ -53,5 +53,6 @@
     <string name="depart">DEPART</string>@string/hour
     <string name="hour">Hora</string>
     <string name="date">Fecha</string>
+    <string name="elige_dia">Elige un día para la cita: </string>
 
 </resources>
