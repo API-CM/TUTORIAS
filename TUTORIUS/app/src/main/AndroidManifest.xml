@@ -58,7 +58,8 @@
             android:name=".Datos_cita"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Pedir_cita"></activity>
+        <activity android:name=".Pedir_cita" />
+        <activity android:name=".Pedir_hora"></activity>
     </application>
 
 </manifest>
