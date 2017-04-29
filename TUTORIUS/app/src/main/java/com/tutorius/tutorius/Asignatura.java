@@ -2,12 +2,14 @@ package com.tutorius.tutorius;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -86,6 +88,33 @@ public class Asignatura extends Fragment {
             }
         });
 
+        //PASO LAS VISTAS A UNA NUEVA ACTIVITY DESDE LA SELECCIONADA
+        li.setOnItemClickListener(new AdapterView.OnItemClickListener(){    //HACINEDO ----
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Row r= (Row) li.getItemAtPosition(position);
+                String pasar=null;
+
+                for(int k=0;k<rows.size();k++){
+                    Row r2=(Row)rows.get(k);
+
+                    if(r.getSubtitle().contains(r2.getSubtitle())){
+                        pasar=r2.getId();
+                    }
+                }
+                //Con el fin de empezar a mostrar una nueva actividad lo que necesitamos es una intención
+
+                Intent intent = new Intent(getActivity(), ListViewAsig.class);  //CAMBIAR
+                Bundle b = new Bundle();
+                b.putString("ID",pasar);  //siglas de la asignatura
+                b.putString("USUARIO",usuario);
+                intent.putExtras(b);
+
+                // Aquí pasaremos el parámetro de la intención creada previamente
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }
@@ -108,9 +137,10 @@ public class Asignatura extends Fragment {
                             // Get current json object
                             JSONObject row = jsonArray.getJSONObject(i);
                             fila = new Row();
+
                             fila.setTitle(row.getString("NOMBRE") + " ");
                             fila.setSubtitle(row.getString("SIGLAS") + " ");
-
+                            fila.setId(row.getString("ID_ASIGNATURA"));
 
                             // Display the formatted json data in text view
 

@@ -4,33 +4,34 @@ package com.tutorius.tutorius;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.github.snowdream.android.widget.SmartImageView;
-import com.loopj.android.http.*;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ListViewDept extends AppCompatActivity {
+public class ListViewAsig extends AppCompatActivity {
 
     ListView li;
     ArrayList nombresProf = new ArrayList();
     ArrayList deptProf = new ArrayList();
     Button btnProf;
     EditText bsqProf;
-    String posicionDept;
+    String posicionAsig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class ListViewDept extends AppCompatActivity {
         btnProf=(Button)findViewById(R.id.btnbusqprof);
         bsqProf=(EditText)findViewById(R.id.busquedaprof);
         Bundle b = this.getIntent().getExtras();
-        posicionDept= b.getString("ID");    //valor de las siglas seleccionadas
+        posicionAsig= b.getString("ID");    //valor de las siglas seleccionadas de la asignatura
 
         getProf();
 
@@ -74,7 +75,7 @@ public class ListViewDept extends AppCompatActivity {
                         deptProf.clear();
                         nombresProf.add(cadena);
                         deptProf.add(cadena2);
-                        li.setAdapter(new ImagenAdapter(getApplicationContext()));
+                        li.setAdapter(new ListViewAsig.ImagenAdapter(getApplicationContext()));
                         break;
                     }
                 }
@@ -96,72 +97,14 @@ public class ListViewDept extends AppCompatActivity {
                         JSONArray jsonArray = new JSONArray(new String(responseBody));
 
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            String x=jsonArray.getJSONObject(i).getString("ID_DEPARTAMENTO");
+                            String x=jsonArray.getJSONObject(i).getString("ID_ASIGNATURA");
 
-                            if(x.contains(posicionDept)){
+                            if(x.contains(posicionAsig)){
 
                                 nombresProf.add(jsonArray.getJSONObject(i).getString("NOMBRE")+" "+
                                         jsonArray.getJSONObject(i).getString("APELLIDO1")+ " "+
                                         jsonArray.getJSONObject(i).getString("APELLIDO2"));
                                 deptProf.add(jsonArray.getJSONObject(i).getString("DESPACHO"));
-                            }
-
-                        }
-
-                        li.setAdapter(new ImagenAdapter(getApplicationContext()));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
-        });
-
-    }
-
-
-    private void getProfFiltrado() {
-        nombresProf.clear();
-        deptProf.clear();
-
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getAllProfesores.php", new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if (statusCode == 200) {
-                    try {
-                        JSONArray jsonArray = new JSONArray(new String(responseBody));
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            String x=jsonArray.getJSONObject(i).getString("ID_DEPARTAMENTO");
-
-                            if(x.contains(posicionDept)){
-
-                                if(jsonArray.getJSONObject(i).getString("NOMBRE").equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("APELLIDO1").equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("APELLIDO2").equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("NOMBRE").toLowerCase().equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("APELLIDO1").toLowerCase().equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("APELLIDO2").toLowerCase().equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("DESPACHO").equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("DESPACHO").toLowerCase().equals(bsqProf.getText())){
-
-                                    nombresProf.add(jsonArray.getJSONObject(i).getString("NOMBRE")+" "+
-                                            jsonArray.getJSONObject(i).getString("APELLIDO1")+ " "+
-                                            jsonArray.getJSONObject(i).getString("APELLIDO2"));
-                                    deptProf.add(jsonArray.getJSONObject(i).getString("DESPACHO"));
-
-                                }else{
-                                    nombresProf.add(jsonArray.getJSONObject(i).getString("NOMBRE")+" "+
-                                            jsonArray.getJSONObject(i).getString("APELLIDO1")+ " "+
-                                            jsonArray.getJSONObject(i).getString("APELLIDO2"));
-                                    deptProf.add(jsonArray.getJSONObject(i).getString("DESPACHO"));
-                                }
                             }
 
                         }

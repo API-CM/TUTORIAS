@@ -55,6 +55,9 @@
             android:name=".ListViewDept"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ListViewAsig"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Datos_cita"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
