@@ -54,5 +54,12 @@
     <string name="hour">Hora</string>
     <string name="date">Fecha</string>
     <string name="elige_dia">Elige un día para la cita: </string>
+    <string name="elige_hora">Elige una hora para la cita: </string>
+    <string name="profesor">Profesor: </string>
+    <string name="hora1">Hora: </string>
+    <string name="fecha1">Fecha: </string>
+    <string name="dia">Día de la semana: </string>
+    <string name="guardar_cita">Guardar cita</string>
+
 
 </resources>

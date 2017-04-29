@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.android.volley.Request;
@@ -39,6 +40,8 @@ public class Pedir_cita extends AppCompatActivity {
     private Context mContext;
     private Activity mActivity;
     private TextView mCLayout;
+
+    Integer numcitas = 0;
 
     ListView listadias;
     String[] listaa;
@@ -429,17 +432,73 @@ public class Pedir_cita extends AppCompatActivity {
                 int posicion = position;
 
                 //obtengo el valor del string del elemento donde se hizo clic
-                String itemValue = (String) listadias.getItemAtPosition(position);
-
+                final String itemValue = (String) listadias.getItemAtPosition(position);
 
                 if(!itemValue.equals("No disponible")){
-                    Intent intent = new Intent(getApplicationContext(), Pedir_hora.class);
-                    Bundle b = new Bundle();
-                    b.putString("DIA_CITA",itemValue);
-                    b.putString("UVUS_PROFESOR","profesor1");
-                    b.putString("USUARIO",usuario);
-                    intent.putExtras(b);
-                    startActivity(intent);
+
+                    //PONER Q EL ALUMNO NO PUEDA RESERVAR SI TIENE YA UNA CITA ESE DIA.
+                    String[] a = itemValue.split(" ");
+                    String fecha2 = a[1];
+                    String cadenallamada2 = IP + "/getNumCitasAlum.php?uvus_profesor=" + profesor + "&fecha=" + fecha2 + "&uvus_alumno=" + usuario;
+
+                    // Initialize a new RequestQueue instance
+                    RequestQueue requestQueue = Volley.newRequestQueue(mContext);
+
+                    // Initialize a new JsonObjectRequest instance
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                            Request.Method.GET,
+                            cadenallamada2,
+                            null,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    // Do something with response
+                                    //mTextView.setText(response.toString());
+
+                                    // Process the JSON
+                                    try {
+                                        // Get the JSON array
+                                        JSONArray array2 = response.getJSONArray("num_citas_alumno");
+
+
+                                        for (int i = 0; i < array2.length(); i++) {
+
+                                            JSONObject reser = array2.getJSONObject(i);
+                                            Integer r = reser.getInt("COUNT(*)");
+                                            numcitas = r;
+                                        }
+
+                                        if(numcitas == 0){
+                                            Intent intent = new Intent(getApplicationContext(), Pedir_hora.class);
+                                            Bundle b = new Bundle();
+                                            b.putString("DIA_CITA",itemValue);
+                                            b.putString("UVUS_PROFESOR","profesor1");
+                                            b.putString("USUARIO",usuario);
+                                            intent.putExtras(b);
+                                            startActivity(intent);
+                                        }else{
+                                            Toast toast1 =
+                                                    Toast.makeText(getApplicationContext(),
+                                                            "Ya tienes una cita ese día con ese profesor", Toast.LENGTH_SHORT);
+                                            toast1.show();
+                                        }
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+
+                            }, null
+                    );
+
+                    // Add JsonObjectRequest to the RequestQueue
+                    requestQueue.add(jsonObjectRequest);
+
+
+
+
+
                 }
                 //Con el fin de empezar a mostrar una nueva actividad lo que necesitamos es una intención
 
