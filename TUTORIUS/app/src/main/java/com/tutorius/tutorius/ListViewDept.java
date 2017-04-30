@@ -75,11 +75,12 @@ public class ListViewDept extends AppCompatActivity {
                         nombresProf.add(cadena);
                         deptProf.add(cadena2);
                         li.setAdapter(new ImagenAdapter(getApplicationContext()));
-                        break;
                     }
                 }
             }
         });
+
+
     }
 
     private void getProf() {

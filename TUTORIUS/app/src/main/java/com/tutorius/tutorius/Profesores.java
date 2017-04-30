@@ -2,12 +2,14 @@ package com.tutorius.tutorius;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -87,13 +89,38 @@ public class Profesores extends Fragment {
             }
         });
 
+        li.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {  //PEDIR CITA
+
+                Row r= (Row) li.getItemAtPosition(position);
+                String pasar=null;
+
+                for(int k=0;k<rows.size();k++){
+                    Row r2=(Row)rows.get(k);
+
+                    if(r.getSubtitle().contains(r2.getSubtitle())){
+                        pasar=r2.getId();
+                    }
+                }
+
+                Intent intent = new Intent(getActivity(), AlumnoPideCitaProfesor.class);
+                Bundle b = new Bundle();
+                b.putString("ID",pasar);  //uvus identificatorio del profesor
+                b.putString("UVUS",usuario);
+                intent.putExtras(b);
+
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 
     private void getProfesores() {
         nombresProfs.clear();
         deptProfs.clear();
-
+        rows.clear();
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getAllProfesores.php", new AsyncHttpResponseHandler() {
@@ -111,9 +138,7 @@ public class Profesores extends Fragment {
                             fila.setTitle(row.getString("NOMBRE") + " "+ row.getString("APELLIDO1")+ " " +
                                     row.getString("APELLIDO2") );
                             fila.setSubtitle(row.getString("DESPACHO") + " ");
-
-
-                            // Display the formatted json data in text view
+                            fila.setId(row.getString("UVUS_PROFESOR")); //En este caso nuestro ID será el UVUS del profesor
 
                             rows.add(fila);
 

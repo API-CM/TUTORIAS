@@ -76,7 +76,6 @@ public class ListViewAsig extends AppCompatActivity {
                         nombresProf.add(cadena);
                         deptProf.add(cadena2);
                         li.setAdapter(new ListViewAsig.ImagenAdapter(getApplicationContext()));
-                        break;
                     }
                 }
             }

@@ -58,12 +58,18 @@
             android:name=".ListViewAsig"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".AlumnoPideCitaProfesor"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Datos_cita"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Pedir_cita" />
-        <activity android:name=".Pedir_hora" />
-        <activity android:name=".Coger_cita"></activity>
+        <activity android:name=".Pedir_cita"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Pedir_hora"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Coger_cita"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

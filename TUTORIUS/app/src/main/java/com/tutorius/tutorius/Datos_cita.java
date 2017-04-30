@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -60,7 +59,7 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_datos_cita);
 
         faux = (TextView)findViewById(R.id.date);
-        haux = (TextView)findViewById(R.id.hour);
+        haux = (TextView)findViewById(R.id.hourCitaProf);
         nombre1 = (TextView) findViewById(R.id.nombre);
         email1 = (TextView)findViewById(R.id.email);
         despacho1 = (TextView)findViewById(R.id.despacho);
