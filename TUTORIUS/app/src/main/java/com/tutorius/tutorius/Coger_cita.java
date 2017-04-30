@@ -127,9 +127,10 @@ public class Coger_cita extends AppCompatActivity implements View.OnClickListene
 
             case R.id.action_settings_back:
 
-                Intent intent = new Intent(Coger_cita.this, Alumnos.class);
+                Intent intent = new Intent(Coger_cita.this, AlumnoPideCitaProfesor.class);
 
                 b.putString("UVUS",usuario);
+                b.putString("ID",profesor);
                 intent.putExtras(b);
                 startActivity(intent);
                 return true;
