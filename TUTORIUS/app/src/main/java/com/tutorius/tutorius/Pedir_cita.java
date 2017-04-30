@@ -500,7 +500,6 @@ public class Pedir_cita extends AppCompatActivity {
 
 
                 }
-                //Con el fin de empezar a mostrar una nueva actividad lo que necesitamos es una intención
 
 
             }
