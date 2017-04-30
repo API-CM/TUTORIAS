@@ -30,11 +30,11 @@ public class ListViewDept extends AppCompatActivity {
     ListView li;
     ArrayList nombresProf = new ArrayList();
     ArrayList deptProf = new ArrayList();
+    ArrayList idProf = new ArrayList();
     Button btnProf;
     EditText bsqProf;
     String posicionDept;
-    String usuario;     //referido al profesor
-    String alumno;      //uvus alumno
+    String usuario;     //referido al alumno
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class ListViewDept extends AppCompatActivity {
         bsqProf=(EditText)findViewById(R.id.busquedaprof);
         Bundle b = this.getIntent().getExtras();
         posicionDept= b.getString("ID");    //valor de las siglas seleccionadas
-
+        usuario=b.getString("USUARIO");
         getProf();
 
         btnProf.setOnClickListener(new View.OnClickListener() { //botón para buscar valor
@@ -88,12 +88,19 @@ public class ListViewDept extends AppCompatActivity {
         li.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               ArrayList x=(ArrayList) li.getItemAtPosition(position);
+               Integer x= (Integer) li.getItemAtPosition(position);
+                String pasar=null;
 
+                for(int i=0;i<nombresProf.size();i++){
+                    if(x==i){
+                        pasar=idProf.get(i).toString();
+                    }
+                }
                 Intent intent = new Intent(getApplicationContext(), AlumnoPideCitaProfesor.class);
                 Bundle b = new Bundle();
                 //b.putString("CITA",itemValue);
-                b.putString("UVUS_PROFESOR",usuario);
+                b.putString("UVUS",usuario);    //UVUS DEL ALUMNO
+                b.putString("ID",pasar);   //UVUS DEL PROFESOR
                 intent.putExtras(b);
 
                 // Aquí pasaremos el parámetro de la intención creada previamente
@@ -106,7 +113,7 @@ public class ListViewDept extends AppCompatActivity {
     private void getProf() {
         nombresProf.clear();
         deptProf.clear();
-
+        idProf.clear();
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getAllProfesores.php", new AsyncHttpResponseHandler() {
@@ -125,6 +132,10 @@ public class ListViewDept extends AppCompatActivity {
                                         jsonArray.getJSONObject(i).getString("APELLIDO1")+ " "+
                                         jsonArray.getJSONObject(i).getString("APELLIDO2"));
                                 deptProf.add(jsonArray.getJSONObject(i).getString("DESPACHO"));
+
+                                //identificador del profesor
+                                idProf.add(jsonArray.getJSONObject(i).getString("UVUS_PROFESOR"));
+
                             }
 
                         }
@@ -144,63 +155,6 @@ public class ListViewDept extends AppCompatActivity {
 
     }
 
-
-    private void getProfFiltrado() {
-        nombresProf.clear();
-        deptProf.clear();
-
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getAllProfesores.php", new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if (statusCode == 200) {
-                    try {
-                        JSONArray jsonArray = new JSONArray(new String(responseBody));
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            String x=jsonArray.getJSONObject(i).getString("ID_DEPARTAMENTO");
-
-                            if(x.contains(posicionDept)){
-
-                                if(jsonArray.getJSONObject(i).getString("NOMBRE").equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("APELLIDO1").equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("APELLIDO2").equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("NOMBRE").toLowerCase().equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("APELLIDO1").toLowerCase().equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("APELLIDO2").toLowerCase().equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("DESPACHO").equals(bsqProf.getText()) ||
-                                        jsonArray.getJSONObject(i).getString("DESPACHO").toLowerCase().equals(bsqProf.getText())){
-
-                                    nombresProf.add(jsonArray.getJSONObject(i).getString("NOMBRE")+" "+
-                                            jsonArray.getJSONObject(i).getString("APELLIDO1")+ " "+
-                                            jsonArray.getJSONObject(i).getString("APELLIDO2"));
-                                    deptProf.add(jsonArray.getJSONObject(i).getString("DESPACHO"));
-
-                                }else{
-                                    nombresProf.add(jsonArray.getJSONObject(i).getString("NOMBRE")+" "+
-                                            jsonArray.getJSONObject(i).getString("APELLIDO1")+ " "+
-                                            jsonArray.getJSONObject(i).getString("APELLIDO2"));
-                                    deptProf.add(jsonArray.getJSONObject(i).getString("DESPACHO"));
-                                }
-                            }
-
-                        }
-
-                        li.setAdapter(new ImagenAdapter(getApplicationContext()));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
-        });
-
-    }
 
     private class ImagenAdapter extends BaseAdapter {
         Context contexto;
