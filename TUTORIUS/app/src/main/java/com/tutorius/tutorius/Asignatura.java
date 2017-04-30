@@ -96,7 +96,7 @@ public class Asignatura extends Fragment {
 
                 Intent intent = new Intent(getActivity(), ListViewAsig.class);
                 Bundle b = new Bundle();
-                b.putString("ID",pasar);  //siglas de la asignatura
+                b.putString("ID",pasar);  //id asig
                 b.putString("USUARIO",usuario);
                 intent.putExtras(b);
 

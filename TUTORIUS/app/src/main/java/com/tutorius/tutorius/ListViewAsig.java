@@ -32,9 +32,10 @@ public class ListViewAsig extends AppCompatActivity {
     ArrayList nombresProf = new ArrayList();
     ArrayList deptProf = new ArrayList();
     ArrayList idProf =new ArrayList();
+    ArrayList uvusProf=new ArrayList(); //array de uvus de profesores
     Button btnProf;
     EditText bsqProf;
-    String posicionAsig;
+    String posicionAsig;    //ID de la asignatura seleccionada
     String usuario;
 
     @Override
@@ -49,6 +50,8 @@ public class ListViewAsig extends AppCompatActivity {
         Bundle b = this.getIntent().getExtras();
         posicionAsig= b.getString("ID");    //valor de las siglas seleccionadas de la asignatura
         usuario=b.getString("USUARIO");
+
+        getAsigImpartidas();
         getProf();
 
         btnProf.setOnClickListener(new View.OnClickListener() { //botón para buscar valor
@@ -60,8 +63,10 @@ public class ListViewAsig extends AppCompatActivity {
                 String ap1;
                 String ap2;
 
-                if(busqueda.isEmpty())
+                if(busqueda.isEmpty()){
+                    getAsigImpartidas();
                     getProf();
+                }
 
                 for(int i=0;i<nombresProf.size();i++){
                     String cadena= (String) nombresProf.get(i);
@@ -88,7 +93,7 @@ public class ListViewAsig extends AppCompatActivity {
 
         li.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {  //listView clic
                 Integer x= (Integer) li.getItemAtPosition(position);
                 String pasar=null;
 
@@ -111,7 +116,7 @@ public class ListViewAsig extends AppCompatActivity {
 
     }
 
-    private void getProf() {
+    private void getProf() {    //Consulta todos los profesores con el filtro
         nombresProf.clear();
         deptProf.clear();
         idProf.clear();
@@ -125,22 +130,55 @@ public class ListViewAsig extends AppCompatActivity {
                         JSONArray jsonArray = new JSONArray(new String(responseBody));
 
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            String x=jsonArray.getJSONObject(i).getString("ID_ASIGNATURA");
+                            String x=jsonArray.getJSONObject(i).getString("UVUS_PROFESOR");
 
-                            if(x.contains(posicionAsig)){
+                            for(int j=0;j<uvusProf.size();j++){
+                                if(x.contains(uvusProf.get(j).toString())){
+                                    nombresProf.add(jsonArray.getJSONObject(i).getString("NOMBRE")+" "+
+                                            jsonArray.getJSONObject(i).getString("APELLIDO1")+ " "+
+                                            jsonArray.getJSONObject(i).getString("APELLIDO2"));
+                                    deptProf.add(jsonArray.getJSONObject(i).getString("DESPACHO"));
 
-                                nombresProf.add(jsonArray.getJSONObject(i).getString("NOMBRE")+" "+
-                                        jsonArray.getJSONObject(i).getString("APELLIDO1")+ " "+
-                                        jsonArray.getJSONObject(i).getString("APELLIDO2"));
-                                deptProf.add(jsonArray.getJSONObject(i).getString("DESPACHO"));
-
-                                //identificador del profesor
-                                idProf.add(jsonArray.getJSONObject(i).getString("UVUS_PROFESOR"));
+                                    //identificador del profesor
+                                    idProf.add(jsonArray.getJSONObject(i).getString("UVUS_PROFESOR"));
+                                }
                             }
-
                         }
 
                         li.setAdapter(new ImagenAdapter(getApplicationContext()));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+
+    }
+
+    private void getAsigImpartidas() {    //Consulta las asignaturas impartidas por los profesores
+        uvusProf.clear();
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get("http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getAsigImpartidas.php", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    try {
+                        JSONArray jsonArray = new JSONArray(new String(responseBody));
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            String x=jsonArray.getJSONObject(i).getString("ID_ASIGNATURA");
+
+                            if(x.contains(posicionAsig))
+                                uvusProf.add(jsonArray.getJSONObject(i).getString("UVUS_PROFESOR"));
+                        }
+
+                       // li.setAdapter(new ImagenAdapter(getApplicationContext()));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
