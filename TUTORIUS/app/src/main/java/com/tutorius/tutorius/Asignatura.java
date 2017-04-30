@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
 import cz.msebera.android.httpclient.Header;
 
 public class Asignatura extends Fragment {
@@ -45,8 +40,6 @@ public class Asignatura extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // super.onCreate(savedInstanceState);
-
         rootView = inflater.inflate(R.layout.asignatura, container, false);
         li= (ListView)rootView.findViewById(R.id.listViewAsig); //buscas en el XML el id de dicho elemento listView
         rows = new ArrayList<Row>();
@@ -60,13 +53,9 @@ public class Asignatura extends Fragment {
         Bundle b = getActivity().getIntent().getExtras();
         usuario = b.getString("UVUS");
 
-        //String cadenallamada = getAlumno + "?uvus_profesor=" + usuario;
-
 
         // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
-
-        // setContentView(R.layout.departamento);
 
         getAsignaturas();
 
@@ -105,7 +94,7 @@ public class Asignatura extends Fragment {
                 }
                 //Con el fin de empezar a mostrar una nueva actividad lo que necesitamos es una intención
 
-                Intent intent = new Intent(getActivity(), ListViewAsig.class);  //CAMBIAR
+                Intent intent = new Intent(getActivity(), ListViewAsig.class);
                 Bundle b = new Bundle();
                 b.putString("ID",pasar);  //siglas de la asignatura
                 b.putString("USUARIO",usuario);
@@ -134,15 +123,12 @@ public class Asignatura extends Fragment {
 
                         Row fila = null;
                         for(int i=0;i<jsonArray.length();i++){
-                            // Get current json object
                             JSONObject row = jsonArray.getJSONObject(i);
                             fila = new Row();
 
                             fila.setTitle(row.getString("NOMBRE") + " ");
                             fila.setSubtitle(row.getString("SIGLAS") + " ");
                             fila.setId(row.getString("ID_ASIGNATURA"));
-
-                            // Display the formatted json data in text view
 
                             rows.add(fila);
 

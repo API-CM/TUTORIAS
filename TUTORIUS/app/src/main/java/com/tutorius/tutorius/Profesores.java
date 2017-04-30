@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
 import cz.msebera.android.httpclient.Header;
 
 public class Profesores extends Fragment {
@@ -46,8 +41,6 @@ public class Profesores extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // super.onCreate(savedInstanceState);
-
         rootView = inflater.inflate(R.layout.profesores, container, false);
         li= (ListView)rootView.findViewById(R.id.listViewProf); //buscas en el XML el id de dicho elemento listView
         rows = new ArrayList<Row>();
@@ -66,8 +59,6 @@ public class Profesores extends Fragment {
 
         // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
-
-        // setContentView(R.layout.departamento);
 
         getProfesores();
 
@@ -132,7 +123,7 @@ public class Profesores extends Fragment {
 
                         Row fila = null;
                         for(int i=0;i<jsonArray.length();i++){
-                            // Get current json object
+
                             JSONObject row = jsonArray.getJSONObject(i);
                             fila = new Row();
                             fila.setTitle(row.getString("NOMBRE") + " "+ row.getString("APELLIDO1")+ " " +

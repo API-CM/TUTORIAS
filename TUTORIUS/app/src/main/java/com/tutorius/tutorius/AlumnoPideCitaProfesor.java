@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,7 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -122,10 +120,8 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
 
                             // Loop through the array elements
                             for(int i=0;i<array.length();i++){
-                                // Get current json object
                                 JSONObject profesor = array.getJSONObject(i);
 
-                                // Get the current student (json object) data
                                 String firstName = profesor.getString("NOMBRE");
                                 String lastName = profesor.getString("APELLIDO1");
                                 String mail = profesor.getString("EMAIL");
@@ -133,9 +129,6 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
                                 String depar = profesor.getString("SIGLAS");
                                 String urlfoto = profesor.getString("FOTO_PERSONAL");
 
-
-
-                                // Display the formatted json data in text view
                                 nombre.setText(firstName +" " + lastName);
                                 email.setText(mail);
                                 despacho.setText(despa);
@@ -156,39 +149,22 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
                                     colaPeticiones.add(peticion);
                                 }
 
-
-
-
-
-
                             }
 
                             listaa = new String[array2.length()];
                             for(int i=0;i<array2.length();i++){
-                                // Get current json object
                                 JSONObject asig = array2.getJSONObject(i);
-
-
-                                // Display the formatted json data in text view
-
                                 listaa[i] = asig.getString("NOMBRE") + " ";
-
                             }
-
 
                             ponerenlistView(listaa);
 
-
-
-
                             for(int i=0;i<array3.length();i++){
-                                // Get current json object
                                 JSONObject hora = array3.getJSONObject(i);
 
                                 String dia = hora.getString("DIA_SEMANA");
                                 String hora_inicio = hora.getString("HORA_INICIO");
                                 String hora_fin = hora.getString("HORA_FIN");
-                                // Display the formatted json data in text view
                                 //EL if es para evitar que el ultimo meta tambien un salto de linea.
                                 if(i!=array3.length()-1){
                                     horario.append(dia + ": " + hora_inicio + " - " + hora_fin + "\n");
@@ -205,7 +181,6 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error){
-                        // Do something when error occurred
                         Snackbar.make(
                                 mCLayout,
                                 "Error",
@@ -215,7 +190,6 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
                 }
         );
 
-        // Add JsonObjectRequest to the RequestQueue
         requestQueue.add(jsonObjectRequest);
 
 
@@ -245,11 +219,7 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
 
         switch(id) {
 
@@ -288,7 +258,7 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
     //
 
 
-    public void onClick(View v) {       //CONSULTA PIDE CITA (HACERLO)
+    public void onClick(View v) {
         switch (v.getId()){
             case R.id.PedirCitaProf:
                 Intent intent = new Intent(AlumnoPideCitaProfesor.this,Pedir_cita.class);

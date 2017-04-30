@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -31,7 +30,6 @@ public class Departamento extends Fragment implements View.OnClickListener{
     ArrayList nombresDept = new ArrayList();
     ArrayList siglasDept = new ArrayList();
     ArrayList rows;
-    ArrayList recogeDatos;  //PARA EL ID
 
     View rootView;
     String usuario;
@@ -42,8 +40,6 @@ public class Departamento extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-       // super.onCreate(savedInstanceState);
 
         rootView = inflater.inflate(R.layout.departamento, container, false);
         li= (ListView)rootView.findViewById(R.id.listViewDepartamento); //buscas en el XML el id de dicho elemento listView
@@ -59,12 +55,8 @@ public class Departamento extends Fragment implements View.OnClickListener{
         Bundle b = getActivity().getIntent().getExtras();
         usuario = b.getString("UVUS");
 
-        //String cadenallamada = getAlumno + "?uvus_profesor=" + usuario;
-
         // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
-
-       // setContentView(R.layout.departamento);
 
         getDepartamentos();     //carga el listView
 
@@ -95,7 +87,6 @@ public class Departamento extends Fragment implements View.OnClickListener{
                 // la posición de parámetro de la vista de lista de Android
 
                 //obtengo el valor del string del elemento donde se hizo clic
-                //String itemValue = (String) li.getItemAtPosition(position);
                 Row r= (Row) li.getItemAtPosition(position);
                 String pasar=null;
 
@@ -138,7 +129,7 @@ public class Departamento extends Fragment implements View.OnClickListener{
                         Row fila = null;
 
                         for(int i=0;i<jsonArray.length();i++){
-                            // Get current json object
+
                             JSONObject row = jsonArray.getJSONObject(i);
                             fila = new Row();
 
@@ -146,10 +137,7 @@ public class Departamento extends Fragment implements View.OnClickListener{
                             fila.setSubtitle(row.getString("SIGLAS") + " ");
                             fila.setId(row.getString("ID_DEPARTAMENTO"));
 
-                            // Display the formatted json data in text view
-
                             rows.add(fila);
-//                            recogeDatos.add(fila2);
                         }
 
                         li.setAdapter(new CustomArrayAdapterDept(getContext(),rows));
