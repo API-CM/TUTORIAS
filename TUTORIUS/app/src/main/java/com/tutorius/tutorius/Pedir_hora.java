@@ -249,7 +249,7 @@ public class Pedir_hora extends AppCompatActivity {
                 b.putString("DIA_SEMANA", dia_semana);
                 b.putString("FECHA", fecha);
                 b.putString("HORA",itemValue);
-                b.putString("UVUS_PROFESOR","profesor1");
+                b.putString("UVUS_PROFESOR",profesor);
                 b.putString("USUARIO",usuario);
                 intent.putExtras(b);
                 startActivity(intent);

@@ -48,6 +48,8 @@ public class Pedir_cita extends AppCompatActivity {
     String[] listaa2;
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
 
+    Integer sum;
+
 
 
     @Override
@@ -344,14 +346,44 @@ public class Pedir_cita extends AppCompatActivity {
                                 }
 
                             }
-                            listaa2 = new String[listaa.length*2];
+
+
+                            switch(listaa.length){
+                                case 0:
+                                    listaa2 = new String[0];
+                                    sum=0;
+                                    break;
+                                case 1:
+                                    listaa2 = new String[2];
+                                    sum=1;
+                                    break;
+                                case 2:
+                                    listaa2 = new String[4];
+                                    sum=2;
+                                    break;
+                                case 3:
+                                    listaa2 = new String[6];
+                                    sum=3;
+                                    break;
+                                case 4:
+                                    listaa2 = new String[8];
+                                    sum=4;
+                                    break;
+                                case 5:
+                                    listaa2 = new String[10];
+                                    sum=5;
+                                    break;
+                            }
+
+
+
                             for (int i=0;i<listaa.length;i++){
                                 String[] a = listaa[i].split(" ");
                                 if(a[0].equals("DEL")){
                                     String dia = a[1];
                                     String strFecha = a[2];
                                     listaa2[i] = "No disponible";
-                                    listaa2[i+3] = dia + " " + strFecha;
+                                    listaa2[i+sum] = dia + " " + strFecha;
 
                                 }else{
                                     String dia = a[0];
@@ -371,7 +403,7 @@ public class Pedir_cita extends AppCompatActivity {
                                     Date fechnew = sumarDiasFecha(fech,7);
                                     String f = formatoDelTexto.format(fechnew);
                                     listaa2[i] = dia + " " + strFecha;
-                                    listaa2[i+3] = dia + " " + f;
+                                    listaa2[i+sum] = dia + " " + f;
                                 }
                              }
 
@@ -472,7 +504,7 @@ public class Pedir_cita extends AppCompatActivity {
                                             Intent intent = new Intent(getApplicationContext(), Pedir_hora.class);
                                             Bundle b = new Bundle();
                                             b.putString("DIA_CITA",itemValue);
-                                            b.putString("UVUS_PROFESOR","profesor1");
+                                            b.putString("UVUS_PROFESOR",profesor);
                                             b.putString("USUARIO",usuario);
                                             intent.putExtras(b);
                                             startActivity(intent);
