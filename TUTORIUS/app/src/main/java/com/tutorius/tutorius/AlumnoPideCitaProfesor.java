@@ -291,13 +291,11 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
     public void onClick(View v) {       //CONSULTA PIDE CITA (HACERLO)
         switch (v.getId()){
             case R.id.PedirCitaProf:
-                Intent intent = new Intent(AlumnoPideCitaProfesor.this,EditarPerfilProfesor.class);
+                Intent intent = new Intent(AlumnoPideCitaProfesor.this,Pedir_cita.class);
                 Bundle b = new Bundle();
-                b.putString("UVUS",usuario);
-                b.putString("NOMBRE",nombre.getText().toString());
-                b.putString("EMAIL",email.getText().toString());
-                b.putString("DEPARTAMENTO",departamento.getText().toString());
-                b.putString("DESPACHO",despacho.getText().toString());
+                b.putString("UVUS",alumno);
+                b.putString("UVUS_PROFESOR",usuario);
+
 
                 intent.putExtras(b);
                 startActivity(intent);

@@ -33,7 +33,6 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
     String cita;
     String usuario;
     Button boton;
-    Button pasar;
     String fecha;
     String hora;
     String id;
@@ -183,9 +182,6 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
 
         boton.setOnClickListener(this);
 
-        //PARA PASAR A LA PARTE DE ENRIQUE Y ALVARO SOLO ES TEMPORAL
-        pasar = (Button) findViewById(R.id.olakase);
-        pasar.setOnClickListener(this);
 
 
     }
@@ -269,15 +265,7 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
                 startActivity(intent);
                 break;
 
-            case R.id.olakase:
-                Intent intent2 = new Intent(Datos_cita.this, Pedir_cita.class);
-                Bundle b1 = new Bundle();
-                b1.putString("UVUS", usuario);
-                b1.putString("UVUS_PROFESOR", "profesor1");
-                intent2.putExtras(b1);
-                startActivity(intent2);
 
-                break;
             default:
 
                 break;

@@ -160,18 +160,6 @@
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/cancelado" />
 
-        <Button
-            android:text="Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="51dp"
-            android:id="@+id/olakase" />
-
 
     </RelativeLayout>
 
