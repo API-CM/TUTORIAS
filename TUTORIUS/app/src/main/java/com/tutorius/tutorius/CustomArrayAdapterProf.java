@@ -1,17 +1,16 @@
 package com.tutorius.tutorius;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Custom adapter - "View Holder Pattern".
- *
- */
+
 public class CustomArrayAdapterProf extends ArrayAdapter<Row>{
 
     private LayoutInflater layoutInflater;
@@ -33,6 +32,11 @@ public class CustomArrayAdapterProf extends ArrayAdapter<Row>{
                     .findViewById(R.id.nombreProf));
             holder.setTextViewSubtitle((TextView) convertView
                     .findViewById(R.id.deptProf));
+
+            //agregado --
+            holder.setImagenView((ImageView) convertView
+            .findViewById(R.id.imageDisponibilidad));
+
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
@@ -41,6 +45,16 @@ public class CustomArrayAdapterProf extends ArrayAdapter<Row>{
         final Row row = getItem(position);
         holder.getTextViewTitle().setText(row.getTitle());
         holder.getTextViewSubtitle().setText(row.getSubtitle());
+        //agregado---
+
+        String x=row.getDisp().toString();
+
+
+        if(x.contains("0"))
+            holder.getImagenView().setImageResource(android.R.drawable.presence_busy);
+        else{
+            holder.getImagenView().setImageResource(android.R.drawable.presence_online);
+        }
 
         return convertView;
     }
@@ -49,6 +63,7 @@ public class CustomArrayAdapterProf extends ArrayAdapter<Row>{
     {
         TextView textViewTitle;
         TextView textViewSubtitle;
+        ImageView imagenView;
 
         public TextView getTextViewTitle()
         {
@@ -69,5 +84,8 @@ public class CustomArrayAdapterProf extends ArrayAdapter<Row>{
         {
             this.textViewSubtitle = textViewSubtitle;
         }
+        //modificado
+        public ImageView getImagenView(){return imagenView;}
+        public void setImagenView(ImageView imagenView){this.imagenView=imagenView;}
     }
 }

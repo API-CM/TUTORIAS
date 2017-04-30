@@ -7,7 +7,9 @@ public class Row
 
     private String subtitle;
 
-    private String id;  //agregado por antonio
+    private String id;  //agregado --
+
+    private String disp;    //disponibilidad del profesor ---
 
     private boolean checked;
 
@@ -33,6 +35,9 @@ public class Row
 
     public String getId(){return id;}   //agregado ---
     public void setId(String id){this.id=id;}    //agregado ---
+
+    public String getDisp(){return disp;}   //agregado --
+    public void setDisp(String disp){this.disp=disp;}   //agregado
 
     public boolean isChecked()
     {

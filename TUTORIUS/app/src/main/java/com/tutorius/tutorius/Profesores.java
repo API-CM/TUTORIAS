@@ -27,6 +27,7 @@ public class Profesores extends Fragment {
     ListView li;
     ArrayList nombresProfs = new ArrayList();
     ArrayList deptProfs = new ArrayList();
+    ArrayList disponibilidadProf=new ArrayList();
     ArrayList rows;
     Button btnProf;
     EditText bsqProf;
@@ -98,7 +99,7 @@ public class Profesores extends Fragment {
                 Intent intent = new Intent(getActivity(), AlumnoPideCitaProfesor.class);
                 Bundle b = new Bundle();
                 b.putString("ID",pasar);  //uvus identificatorio del profesor
-                b.putString("UVUS",usuario);
+                b.putString("UVUS",usuario);    //uvus alumno
                 intent.putExtras(b);
 
                 startActivity(intent);
@@ -112,6 +113,7 @@ public class Profesores extends Fragment {
         nombresProfs.clear();
         deptProfs.clear();
         rows.clear();
+        disponibilidadProf.clear();
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getAllProfesores.php", new AsyncHttpResponseHandler() {
@@ -131,11 +133,13 @@ public class Profesores extends Fragment {
                             fila.setSubtitle(row.getString("DESPACHO") + " ");
                             fila.setId(row.getString("UVUS_PROFESOR")); //En este caso nuestro ID será el UVUS del profesor
 
+                            fila.setDisp(row.getString("DISPONIBILIDAD"));  //Disponibilidad del profesor
+
                             rows.add(fila);
 
                         }
 
-                        li.setAdapter(new CustomArrayAdapterDept(getContext(),rows));
+                        li.setAdapter(new CustomArrayAdapterProf(getContext(),rows));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

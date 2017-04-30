@@ -134,7 +134,7 @@ public class Asignatura extends Fragment {
 
                         }
 
-                        li.setAdapter(new CustomArrayAdapterDept(getContext(),rows));
+                        li.setAdapter(new CustomArrayAdapterAsig(getContext(),rows));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
