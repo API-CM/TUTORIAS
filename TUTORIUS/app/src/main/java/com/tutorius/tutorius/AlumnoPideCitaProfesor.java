@@ -200,7 +200,7 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main2, menu);
         return true;
     }
 
@@ -221,34 +221,29 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        Bundle b = new Bundle();
+
         switch(id) {
 
             case R.id.action_settings_back:
-               /* Intent intent = new Intent(ModificacionPerfilProfesor.this, MainActivity.class);
+                Intent intent = new Intent(AlumnoPideCitaProfesor.this, Alumnos.class);
+
+                b.putString("UVUS",usuario);
+                intent.putExtras(b);
                 startActivity(intent);
-                return true;
-                */
-                finish();
-                startActivity(getIntent());
                 return true;
 
             case R.id.action_settings_home:
-            /*    Intent intent2 = new Intent(ModificacionPerfilProfesor.this, MainActivity.class);
-                startActivity(intent2);
-                return true;
-                */
-                finish();
-                startActivity(getIntent());
-                return true;
+                Intent intent2 = new Intent(AlumnoPideCitaProfesor.this, Principal_alumno.class);
 
-            case R.id.action_settings_profile:
-                finish();
-                startActivity(getIntent());
+                b.putString("UVUS",usuario);
+                intent2.putExtras(b);
+                startActivity(intent2);
                 return true;
 
             case R.id.action_settings_out:
-                Intent intent4 = new Intent(AlumnoPideCitaProfesor.this, MainActivity.class);
-                startActivity(intent4);
+                Intent intent3 = new Intent(AlumnoPideCitaProfesor.this, MainActivity.class);
+                startActivity(intent3);
                 return true;
 
         }
