@@ -2,12 +2,14 @@ package com.tutorius.tutorius;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -31,6 +33,8 @@ public class ListViewDept extends AppCompatActivity {
     Button btnProf;
     EditText bsqProf;
     String posicionDept;
+    String usuario;     //referido al profesor
+    String alumno;      //uvus alumno
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,22 @@ public class ListViewDept extends AppCompatActivity {
             }
         });
 
+
+        li.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               ArrayList x=(ArrayList) li.getItemAtPosition(position);
+
+                Intent intent = new Intent(getApplicationContext(), AlumnoPideCitaProfesor.class);
+                Bundle b = new Bundle();
+                //b.putString("CITA",itemValue);
+                b.putString("UVUS_PROFESOR",usuario);
+                intent.putExtras(b);
+
+                // Aquí pasaremos el parámetro de la intención creada previamente
+                startActivity(intent);
+            }
+        });
 
     }
 
