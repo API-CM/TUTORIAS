@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class ListViewAsig extends AppCompatActivity {
     ArrayList nombresProf = new ArrayList();
     ArrayList deptProf = new ArrayList();
     ArrayList idProf =new ArrayList();
+    ArrayList dispProf=new ArrayList();
     ArrayList uvusProf=new ArrayList(); //array de uvus de profesores
     Button btnProf;
     EditText bsqProf;
@@ -128,6 +130,7 @@ public class ListViewAsig extends AppCompatActivity {
         nombresProf.clear();
         deptProf.clear();
         idProf.clear();
+        dispProf.clear();
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getAllProfesores.php", new AsyncHttpResponseHandler() {
@@ -141,7 +144,7 @@ public class ListViewAsig extends AppCompatActivity {
                             String x=jsonArray.getJSONObject(i).getString("UVUS_PROFESOR");
 
                             for(int j=0;j<uvusProf.size();j++){
-                                if(x.contains(uvusProf.get(j).toString())){
+                                if(x.equals(uvusProf.get(j).toString())){
                                     nombresProf.add(jsonArray.getJSONObject(i).getString("NOMBRE")+" "+
                                             jsonArray.getJSONObject(i).getString("APELLIDO1")+ " "+
                                             jsonArray.getJSONObject(i).getString("APELLIDO2"));
@@ -149,6 +152,9 @@ public class ListViewAsig extends AppCompatActivity {
 
                                     //identificador del profesor
                                     idProf.add(jsonArray.getJSONObject(i).getString("UVUS_PROFESOR"));
+
+                                    //disponibilidad de profesor
+                                    dispProf.add(jsonArray.getJSONObject(i).getString("DISPONIBILIDAD"));
                                 }
                             }
                         }
@@ -182,7 +188,7 @@ public class ListViewAsig extends AppCompatActivity {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             String x=jsonArray.getJSONObject(i).getString("ID_ASIGNATURA");
 
-                            if(x.contains(posicionAsig))
+                            if(x.equals(posicionAsig))
                                 uvusProf.add(jsonArray.getJSONObject(i).getString("UVUS_PROFESOR"));
                         }
 
@@ -205,6 +211,7 @@ public class ListViewAsig extends AppCompatActivity {
         Context contexto;
         LayoutInflater layoutInflater;
         SmartImageView smartImagenView;
+        ImageView imageView;
         TextView nombreProf, depttProf;
 
         public ImagenAdapter(Context applicationContext) {
@@ -235,12 +242,20 @@ public class ListViewAsig extends AppCompatActivity {
             nombreProf=(TextView)viewGroup.findViewById(R.id.nombreProf);
             depttProf=(TextView)viewGroup.findViewById(R.id.deptProf);
 
+            imageView=(ImageView)viewGroup.findViewById(R.id.imageDisponibilidad);
+
             //String urlFinal=""+imagen.get(position).toString;
             //Rect rect=new Rect(smartImagenView.getLeft(),smartImagenView.getTop(),smartImagenView.getRight(),smartImagenView.getBottom())
             //smartImagenView.setImageUrl(urlFinal,rect);
 
             nombreProf.setText(nombresProf.get(position).toString());
             depttProf.setText(deptProf.get(position).toString());
+
+            if(dispProf.get(position).toString().contains("0"))
+                imageView.setImageResource(android.R.drawable.presence_busy);
+            else{
+                imageView.setImageResource(android.R.drawable.presence_online);
+            }
 
             return viewGroup;
         }

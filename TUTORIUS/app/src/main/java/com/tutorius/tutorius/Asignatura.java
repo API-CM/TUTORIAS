@@ -88,7 +88,7 @@ public class Asignatura extends Fragment {
                 for(int k=0;k<rows.size();k++){
                     Row r2=(Row)rows.get(k);
 
-                    if(r.getSubtitle().contains(r2.getSubtitle())){
+                    if(r.getSubtitle().equals(r2.getSubtitle())){
                         pasar=r2.getId();
                     }
                 }
