@@ -38,6 +38,10 @@ import java.util.List;
 public class ModificarAsignaturas extends AppCompatActivity implements View.OnClickListener{
 
     String usuario;
+    String nombre;
+    String email;
+    String departamento;
+    String despacho;
     Button añadir;
     Button eliminar;
     EditText asig;
@@ -61,6 +65,10 @@ public class ModificarAsignaturas extends AppCompatActivity implements View.OnCl
 
         Bundle b = this.getIntent().getExtras();
         usuario = b.getString("UVUS");
+        nombre = b.getString("NOMBRE");
+        email = b.getString("EMAIL");
+        despacho = b.getString("DESPACHO");
+        departamento = b.getString("DEPARTAMENTO");
         añadir = (Button)findViewById(R.id.add);
         eliminar = (Button)findViewById(R.id.delete);
         asig = (EditText)findViewById(R.id.nom_asig);
@@ -232,6 +240,10 @@ public class ModificarAsignaturas extends AppCompatActivity implements View.OnCl
                 Intent intent = new Intent(ModificarAsignaturas.this, EditarPerfilProfesor.class);
 
                 b.putString("UVUS",usuario);
+                b.putString("NOMBRE",nombre);
+                b.putString("EMAIL",email);
+                b.putString("DESPACHO",despacho);
+                b.putString("DEPARTAMENTO",departamento);
                 intent.putExtras(b);
                 startActivity(intent);
                 return true;
@@ -266,4 +278,9 @@ public class ModificarAsignaturas extends AppCompatActivity implements View.OnCl
         return super.onOptionsItemSelected(item);
     }
     //
+
+    //nombre = b.getString("NOMBRE");
+    //departamento = b.getString("DEPARTAMENTO");
+    //email = b.getString("EMAIL");
+    //despacho = b.getString("DESPACHO");
 }

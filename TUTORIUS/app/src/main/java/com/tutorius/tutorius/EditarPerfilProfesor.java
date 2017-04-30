@@ -115,6 +115,10 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
                 Intent intent2 = new Intent(EditarPerfilProfesor.this,ModificarAsignaturas.class);
                 Bundle b2 = new Bundle();
                 b2.putString("UVUS",usuario);
+                b2.putString("NOMBRE",nombre);
+                b2.putString("DEPARTAMENTO",departamento);
+                b2.putString("EMAIL",email);
+                b2.putString("DESPACHO",despacho);
                 intent2.putExtras(b2);
                 startActivity(intent2);
                 break;
@@ -122,6 +126,10 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
                 Intent intent3 = new Intent(EditarPerfilProfesor.this,ModificarHorario.class);
                 Bundle b3 = new Bundle();
                 b3.putString("UVUS",usuario);
+                b3.putString("NOMBRE",nombre);
+                b3.putString("DEPARTAMENTO",departamento);
+                b3.putString("EMAIL",email);
+                b3.putString("DESPACHO",despacho);
                 intent3.putExtras(b3);
                 startActivity(intent3);
                 break;

@@ -39,6 +39,10 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
 
     Button add;
     String usuario;
+    String nombre;
+    String email;
+    String despacho;
+    String departamento;
     String getAddHorario;
     Spinner dia;
     Spinner hora_ini;
@@ -67,6 +71,10 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
 
         Bundle b = this.getIntent().getExtras();
         usuario = b.getString("UVUS");
+        nombre = b.getString("NOMBRE");
+        email = b.getString("EMAIL");
+        despacho = b.getString("DESPACHO");
+        departamento = b.getString("DEPARTAMENTO");
 
 
         dia = (Spinner) findViewById(R.id.dia_semana);
@@ -293,6 +301,10 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                 Intent intent = new Intent(ModificarHorario.this, EditarPerfilProfesor.class);
 
                 b.putString("UVUS",usuario);
+                b.putString("NOMBRE",nombre);
+                b.putString("EMAIL",email);
+                b.putString("DESPACHO",despacho);
+                b.putString("DEPARTAMENTO",departamento);
                 intent.putExtras(b);
                 startActivity(intent);
                 return true;
