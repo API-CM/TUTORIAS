@@ -93,6 +93,7 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
         alumno=b.getString("UVUS");     //uvus del alumno
 
 
+
         String cadenallamada = getProfesor + "?uvus_profesor=" + usuario;
 
 
@@ -228,7 +229,7 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
             case R.id.action_settings_back:
                 Intent intent = new Intent(AlumnoPideCitaProfesor.this, Alumnos.class);
 
-                b.putString("UVUS",usuario);
+                b.putString("UVUS",alumno);
                 intent.putExtras(b);
                 startActivity(intent);
                 return true;
@@ -236,7 +237,7 @@ public class AlumnoPideCitaProfesor extends AppCompatActivity implements View.On
             case R.id.action_settings_home:
                 Intent intent2 = new Intent(AlumnoPideCitaProfesor.this, Principal_alumno.class);
 
-                b.putString("UVUS",usuario);
+                b.putString("UVUS",alumno);
                 intent2.putExtras(b);
                 startActivity(intent2);
                 return true;
