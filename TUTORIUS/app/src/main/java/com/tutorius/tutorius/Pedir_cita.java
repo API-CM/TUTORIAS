@@ -3,10 +3,9 @@ package com.tutorius.tutorius;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
-import android.icu.util.GregorianCalendar;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -113,6 +112,12 @@ public class Pedir_cita extends AppCompatActivity {
                                 Date date = cal.getTime();
                                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                                 String formatteDate = df.format(date);
+
+                                Date fechaActual = new Date();
+                                SimpleDateFormat apptivaWeb = new SimpleDateFormat("dd-MM-yyyy");
+                                String res = apptivaWeb.format(fechaActual);
+
+
 
 
                                     //VER EL DIA QUE ES EL DIA Y SI ES POSTERIOR AL DIA DE LA SEMANA QUE ES HOY AÑADIRLO CON LA FECHA
