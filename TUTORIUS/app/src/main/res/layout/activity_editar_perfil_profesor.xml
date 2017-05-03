@@ -91,6 +91,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/name"
         android:layout_width="300dp"
+        android:layout_marginLeft="75dp"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp" />

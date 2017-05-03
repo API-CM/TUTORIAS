@@ -16,21 +16,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="50dp">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="45dp"
-        android:hint="@string/addasig"
-        android:id="@+id/nom_asig" />
-
-    <Button
+        <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/add"
@@ -48,16 +34,7 @@
         android:layout_below="@+id/add"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:text="@string/addasignatura"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/add"
-        android:layout_alignLeft="@+id/nom_asig"
-        android:layout_alignStart="@+id/nom_asig"
-        android:id="@+id/textView6" />
-
-    <ListView
+        <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="28dp"
@@ -77,6 +54,29 @@
         android:drawablePadding="8dp"
         android:layout_marginBottom="30dp"
         android:id="@+id/delete" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_marginTop="56dp"
+            android:hint="@string/addasig"
+            android:id="@+id/nom_asig"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/delete"
+            android:layout_alignEnd="@+id/delete" />
+
+        <TextView
+            android:text="@string/addasignatura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/activity_horizontal_margin"
+            android:id="@+id/textView6"
+            android:layout_above="@+id/add"
+            android:layout_alignLeft="@+id/nom_asig"
+            android:layout_alignStart="@+id/nom_asig"
+            android:layout_marginBottom="12dp" />
 
     </RelativeLayout>
 </RelativeLayout>
