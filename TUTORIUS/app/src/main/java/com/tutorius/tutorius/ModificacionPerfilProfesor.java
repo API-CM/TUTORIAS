@@ -55,6 +55,7 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
     TextView horario;
     TextView despacho;
     ListView listaasigs;
+    TextView dispo;
 
     ImageView foto;
 
@@ -94,6 +95,7 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
         email = (TextView)findViewById(R.id.email);
         horario = (TextView)findViewById(R.id.horario);
         despacho = (TextView)findViewById(R.id.despacho);
+        dispo = (TextView) findViewById(R.id.disponibilidad);
         edit = (Button)findViewById(R.id.editar);
         final Bitmap bitmap;
 
@@ -148,11 +150,18 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
                                 String mail = profesor.getString("EMAIL");
                                 String despa = profesor.getString("DESPACHO");
                                 String depar = profesor.getString("SIGLAS");
+                                String dispo2 = profesor.getString("DISPONIBILIDAD");
                                 String urlfoto = profesor.getString("FOTO_PERSONAL");
 
 
 
                                 // Display the formatted json data in text view
+                                if(dispo2.equals("0")){
+                                    dispo.setText("OFF");
+                                }else{
+                                    dispo.setText("ON");
+                                }
+
                                 nombre.setText(firstName +" " + lastName);
                                 email.setText(mail);
                                 despacho.setText(despa);
@@ -315,6 +324,7 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
                 b.putString("EMAIL",email.getText().toString());
                 b.putString("DEPARTAMENTO",departamento.getText().toString());
                 b.putString("DESPACHO",despacho.getText().toString());
+                b.putString("DISPONIBILIDAD", dispo.getText().toString());
 
                 intent.putExtras(b);
                 startActivity(intent);

@@ -61,6 +61,9 @@
     <string name="fecha1">Fecha: </string>
     <string name="dia">Día de la semana: </string>
     <string name="guardar_cita">Guardar cita</string>
+    <string name="disponibilidad">Disponibilidad</string>
+    <string name="disponibilidad2">Disponibilidad:</string>
+
 
 
 </resources>

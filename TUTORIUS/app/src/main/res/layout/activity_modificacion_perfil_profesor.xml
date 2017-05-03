@@ -16,7 +16,10 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="50dp">
+        android:paddingTop="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,7 +29,7 @@
             android:layout_alignStart="@+id/nombreCitaProf"
             android:layout_marginLeft="13dp"
             android:layout_marginStart="13dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="3dp"
             android:layout_alignParentLeft="true"
             android:id="@+id/nombre" />
 
@@ -36,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:id="@+id/depCitaProf"
+            android:textColor="?attr/actionMenuTextColor"
             android:layout_below="@+id/nombre"
             android:layout_alignLeft="@+id/nombreCitaProf"
             android:layout_alignStart="@+id/nombreCitaProf" />
@@ -47,6 +51,7 @@
             android:layout_marginTop="11dp"
             android:id="@+id/nombreCitaProf"
             android:layout_alignParentTop="true"
+            android:textColor="?attr/actionMenuTextColor"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -56,7 +61,7 @@
             android:layout_below="@+id/depCitaProf"
             android:layout_toRightOf="@+id/nombre"
             android:layout_toEndOf="@+id/nombre"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="3dp"
             android:paddingLeft="15dp"
             android:layout_alignParentLeft="true"
             android:id="@+id/departamento" />
@@ -69,10 +74,11 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="13dp"
+            android:textColor="?attr/actionMenuTextColor"
             android:id="@+id/emailCitaProf" />
 
         <TextView
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="3dp"
             android:id="@+id/email"
             android:layout_below="@+id/emailCitaProf"
             android:layout_toRightOf="@+id/nombre"
@@ -89,6 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/email"
             android:layout_alignParentLeft="true"
+            android:textColor="?attr/actionMenuTextColor"
             android:layout_alignParentStart="true"
             android:layout_marginTop="11dp"
             android:id="@+id/depachoCitaProf" />
@@ -96,23 +103,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="3dp"
             android:id="@+id/despacho"
             android:paddingLeft="15dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/depachoCitaProf"
             android:layout_alignLeft="@+id/email"
             android:layout_alignStart="@+id/email" />
-        <TextView
-            android:text="@string/horario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/despacho"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="13dp"
-            android:id="@+id/hourCitaProf"
-            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -134,16 +131,6 @@
             android:layout_alignParentEnd="true"
             android:layout_alignBottom="@+id/emailCitaProf" />
 
-        <TextView
-            android:text="@string/asignaturas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:id="@+id/textView13"
-            android:layout_below="@+id/horario"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
         <Button
             android:text="@string/editProfile"
             android:layout_width="wrap_content"
@@ -155,17 +142,58 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/disponibilidad"
+            android:layout_alignBaseline="@+id/textView3"
+            android:layout_alignBottom="@+id/textView3"
+            android:layout_toRightOf="@+id/textView3"
+            android:layout_toEndOf="@+id/textView3" />
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:id="@+id/listasig"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/textView13" />
+            android:layout_below="@+id/textView13"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="@string/asignaturas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:textColor="?attr/actionMenuTextColor"
+            android:id="@+id/textView13"
+            android:layout_below="@+id/horario"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="@string/horario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/actionMenuTextColor"
+            android:id="@+id/hourCitaProf"
+            android:layout_below="@+id/disponibilidad"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:text="@string/disponibilidad2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:textColor="?attr/actionMenuTextColor"
+            android:layout_below="@+id/editar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp" />
 
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>

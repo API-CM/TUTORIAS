@@ -3,6 +3,7 @@ package com.tutorius.tutorius;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.SwipeDismissBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -42,6 +44,8 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
     EditText mail;
     EditText despa;
     TextView nombreT;
+    Switch dispo;
+    String disponible1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,7 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
         mail = (EditText) findViewById(R.id.email);
         despa = (EditText) findViewById(R.id.despacho);
         nombreT = (TextView) findViewById(R.id.name);
+        dispo = (Switch)findViewById(R.id.disponibilidad);
 
         Bundle b = this.getIntent().getExtras();
         usuario = b.getString("UVUS");
@@ -64,6 +69,14 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
         email = b.getString("EMAIL");
         despacho = b.getString("DESPACHO");
         departamento = b.getString("DEPARTAMENTO");
+        disponible1 = b.getString("DISPONIBILIDAD");
+
+        if(disponible1.equals("ON")){
+            dispo.setChecked(true);
+        }else{
+            dispo.setChecked(false);
+        }
+
         actualizar = (Button) findViewById(R.id.update);
         modasig = (Button) findViewById(R.id.modificarasigs);
         modhor = (Button) findViewById(R.id.modificarhorario);
@@ -86,7 +99,7 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
                 mContext = getApplicationContext();
                 String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
                 // Rutas de los Web Services
-                String getUpdate = IP+"/getUpdateProfesor.php?uvus_profesor=" + usuario +"&departamento=" + depar.getText() + "&despacho="+ despa.getText() + "&email="+mail.getText();
+                String getUpdate = IP+"/getUpdateProfesor.php?uvus_profesor=" + usuario +"&departamento=" + depar.getText() + "&despacho="+ despa.getText() + "&email="+mail.getText() + "&disponibilidad=" + dispo.isChecked();
 
 
                 RequestQueue requestQueue = Volley.newRequestQueue(mContext);

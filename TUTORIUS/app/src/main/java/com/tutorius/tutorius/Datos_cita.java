@@ -226,7 +226,7 @@ public class Datos_cita extends AppCompatActivity implements View.OnClickListene
 
             case R.id.action_settings_out:
 
-                Intent intent3 = new Intent(Datos_cita.this, Principal_alumno.class);
+                Intent intent3 = new Intent(Datos_cita.this, MainActivity.class);
                 startActivity(intent3);
                 return true;
 

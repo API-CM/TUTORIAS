@@ -39,6 +39,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/email"
+
         android:layout_below="@+id/textView10"
         android:layout_alignRight="@+id/update"
         android:layout_alignEnd="@+id/update" />
@@ -53,33 +54,12 @@
         android:layout_alignLeft="@+id/email"
         android:layout_alignStart="@+id/email" />
 
-    <Button
-        android:text="@string/modificarasigs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/modificarasigs"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/despacho"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="@string/modificarhorario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/modificarhorario"
-        android:layout_marginTop="13dp"
-        android:layout_below="@+id/modificarasigs"
-        android:layout_alignRight="@+id/modificarasigs"
-        android:layout_alignEnd="@+id/modificarasigs"
-        android:layout_toEndOf="@+id/textView12"
-        android:layout_alignLeft="@+id/modificarasigs"
-        android:layout_alignStart="@+id/modificarasigs" />
-
-    <TextView
+        <TextView
         android:text="@string/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView10"
+        android:textColor="?attr/actionMenuTextColor"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView"
         android:layout_below="@+id/departamento" />
@@ -89,6 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView12"
+        android:textColor="?attr/actionMenuTextColor"
         android:layout_below="@+id/email"
         android:layout_alignLeft="@+id/textView10"
         android:layout_alignStart="@+id/textView10" />
@@ -99,6 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="34dp"
         android:id="@+id/textView"
+        android:textColor="?attr/actionMenuTextColor"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/textView4"
         android:layout_alignStart="@+id/textView4" />
@@ -116,6 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView4"
+        android:textColor="?attr/actionMenuTextColor"
         android:layout_below="@+id/name"
         android:layout_alignLeft="@+id/departamento"
         android:layout_alignStart="@+id/departamento"
@@ -130,6 +113,34 @@
         android:layout_below="@+id/textView12"
         android:layout_alignLeft="@+id/textView12"
         android:layout_alignStart="@+id/textView12" />
+
+        <Button
+            android:text="@string/modificarasigs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/modificarasigs"
+            android:layout_above="@+id/modificarhorario"
+            android:layout_toRightOf="@+id/disponibilidad"
+            android:layout_toEndOf="@+id/disponibilidad" />
+
+        <Button
+            android:text="@string/modificarhorario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/modificarhorario"
+            android:layout_above="@+id/update"
+            android:layout_alignRight="@+id/modificarasigs"
+            android:layout_alignEnd="@+id/modificarasigs" />
+
+        <Switch
+            android:text="@string/disponibilidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/disponibilidad"
+            android:layout_below="@+id/despacho"
+            android:layout_alignLeft="@+id/despacho"
+            android:layout_alignStart="@+id/despacho"
+            android:layout_marginTop="11dp" />
 
     </RelativeLayout>
 
