@@ -67,15 +67,16 @@ public class Profesores extends Fragment {
             public void onClick(View arg0)
             {
                 ArrayList<Row> rows2=new ArrayList<Row>();
+                String busqueda= String.valueOf(bsqProf.getText());
                 for(int i=0;i<rows.size();i++) {
 
                     Row r = (Row) rows.get(i);
 
-                    if ( r.getTitle().contains(bsqProf.getText()) || r.getSubtitle().contains(bsqProf.getText()) ||
-                            r.getTitle().toLowerCase().contains(bsqProf.getText()) ||
-                            r.getSubtitle().toLowerCase().contains(bsqProf.getText()) ) {
-                        rows2.add(r);
-                        li.setAdapter(new CustomArrayAdapterDept(getContext(), rows2));
+                    if(busqueda.isEmpty())
+                        getProfesores();
+
+                    else{
+                        getProfesores2();
                     }
                 }
             }
@@ -137,6 +138,59 @@ public class Profesores extends Fragment {
 
                             rows.add(fila);
 
+                        }
+
+                        li.setAdapter(new CustomArrayAdapterProf(getContext(),rows));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+
+    }
+
+
+    private void getProfesores2() {
+        nombresProfs.clear();
+        deptProfs.clear();
+        rows.clear();
+        disponibilidadProf.clear();
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get("http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com/getAllProfesores.php", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    try {
+                        JSONArray jsonArray = new JSONArray(new String(responseBody));
+
+                        Row fila = null;
+                        for(int i=0;i<jsonArray.length();i++){
+                            JSONObject row = jsonArray.getJSONObject(i);
+
+                            if ( row.getString("NOMBRE").contains(bsqProf.getText()) || row.getString("APELLIDO1").contains(bsqProf.getText())
+                                    || row.getString("NOMBRE").toLowerCase().contains(bsqProf.getText()) ||
+                                    row.getString("APELLIDO1").toLowerCase().contains(bsqProf.getText()) ||
+                                    row.getString("APELLIDO2").toLowerCase().contains(bsqProf.getText())  ||
+                                    row.getString("APELLIDO2").contains(bsqProf.getText()) ||
+                                    row.getString("DESPACHO").toLowerCase().contains(bsqProf.getText())  ||
+                                    row.getString("DESPACHO").contains(bsqProf.getText())) {
+                                fila = new Row();
+                                fila.setTitle(row.getString("NOMBRE") + " " + row.getString("APELLIDO1") + " " +
+                                        row.getString("APELLIDO2"));
+                                fila.setSubtitle(row.getString("DESPACHO") + " ");
+                                fila.setId(row.getString("UVUS_PROFESOR")); //En este caso nuestro ID será el UVUS del profesor
+
+                                fila.setDisp(row.getString("DISPONIBILIDAD"));  //Disponibilidad del profesor
+
+                                rows.add(fila);
+                            }
                         }
 
                         li.setAdapter(new CustomArrayAdapterProf(getContext(),rows));
