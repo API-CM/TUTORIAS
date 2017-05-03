@@ -54,14 +54,18 @@
         android:layout_alignLeft="@+id/uvus"
         android:layout_alignStart="@+id/uvus" />
 
-    <TextView
+    <Button
         android:text="@string/remember_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:id="@+id/remember_pass"
         android:layout_below="@+id/login"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:elevation="0dp"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:drawableBottom="@android:drawable/menuitem_background"
+        style="@style/AppTheme" />
 
     <TextView
         android:layout_width="wrap_content"
