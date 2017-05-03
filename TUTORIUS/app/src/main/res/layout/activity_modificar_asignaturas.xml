@@ -73,6 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/remove"
+        android:drawablePadding="8dp"
         android:layout_marginBottom="30dp"
         android:id="@+id/delete" />
 

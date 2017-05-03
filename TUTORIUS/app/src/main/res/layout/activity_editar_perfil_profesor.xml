@@ -22,6 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="19dp"
+        android:drawableLeft="@drawable/refresh"
+        android:drawablePadding="8dp"
         android:id="@+id/update"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
@@ -114,24 +116,6 @@
         android:layout_alignLeft="@+id/textView12"
         android:layout_alignStart="@+id/textView12" />
 
-        <Button
-            android:text="@string/modificarasigs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/modificarasigs"
-            android:layout_above="@+id/modificarhorario"
-            android:layout_toRightOf="@+id/disponibilidad"
-            android:layout_toEndOf="@+id/disponibilidad" />
-
-        <Button
-            android:text="@string/modificarhorario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/modificarhorario"
-            android:layout_above="@+id/update"
-            android:layout_alignRight="@+id/modificarasigs"
-            android:layout_alignEnd="@+id/modificarasigs" />
-
         <Switch
             android:text="@string/disponibilidad"
             android:layout_width="wrap_content"
@@ -141,6 +125,30 @@
             android:layout_alignLeft="@+id/despacho"
             android:layout_alignStart="@+id/despacho"
             android:layout_marginTop="11dp" />
+
+        <Button
+            android:text="@string/modificarasigs"
+            android:layout_width="wrap_content"
+            android:drawableLeft="@drawable/editar2"
+            android:drawablePadding="8dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/modificarasigs"
+            android:layout_above="@+id/errores"
+            android:layout_alignLeft="@+id/disponibilidad"
+            android:layout_alignStart="@+id/disponibilidad"
+            android:layout_marginBottom="20dp" />
+
+        <Button
+            android:text="@string/modificarhorario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/modificarhorario"
+            android:drawableLeft="@drawable/editar2"
+            android:drawablePadding="8dp"
+            android:layout_alignBaseline="@+id/modificarasigs"
+            android:layout_alignBottom="@+id/modificarasigs"
+            android:layout_alignRight="@+id/name"
+            android:layout_alignEnd="@+id/name" />
 
     </RelativeLayout>
 

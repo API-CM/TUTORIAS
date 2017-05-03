@@ -43,9 +43,6 @@
             android:name=".Profesor"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AddAsignaturas"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Principal_alumno"
             android:screenOrientation="portrait" />
         <activity

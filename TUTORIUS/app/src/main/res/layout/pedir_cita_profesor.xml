@@ -156,6 +156,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/PedirCitaProf"
             android:layout_below="@+id/email"
+            android:drawableLeft="@drawable/cita"
+            android:drawablePadding="8dp"
             android:layout_alignLeft="@+id/imageView"
             android:layout_alignStart="@+id/imageView"
             android:layout_alignParentRight="true"

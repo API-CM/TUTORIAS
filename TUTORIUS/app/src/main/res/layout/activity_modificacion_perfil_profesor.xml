@@ -137,8 +137,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editar"
             android:layout_below="@+id/email"
-            android:layout_alignLeft="@+id/imageView"
-            android:layout_alignStart="@+id/imageView"
+            android:drawableLeft="@drawable/editar2"
+            android:drawablePadding="8dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 

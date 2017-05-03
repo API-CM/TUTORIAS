@@ -38,6 +38,8 @@
         android:id="@+id/btnbusqasig"
         android:layout_alignTop="@+id/busquedaasig"
         android:layout_alignParentRight="true"
+        android:drawableLeft="@drawable/search"
+        android:drawablePadding="8dp"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="23dp"
         android:layout_marginEnd="23dp" />

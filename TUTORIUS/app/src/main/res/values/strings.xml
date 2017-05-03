@@ -22,8 +22,8 @@
     <string name="title_activity_editar_perfil_profesor">EditarPerfilProfesor</string>
     <string name="update">Actualizar</string>
     <string name="PedirCitaProf">Pedir cita</string>
-    <string name="modificarhorario">Modificar Horario</string>
-    <string name="modificarasigs">Modificar Asignaturas</string>
+    <string name="modificarhorario">Horario</string>
+    <string name="modificarasigs">Asignaturas</string>
     <string name="addasig">Siglas Asignaturas</string>
     <string name="addasignatura">Añadir una nueva asignatura:</string>
     <string name="addhorario">Añadir una nueva franja de tutoria</string>
