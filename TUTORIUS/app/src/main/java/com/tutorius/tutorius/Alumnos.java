@@ -33,8 +33,6 @@ public class Alumnos extends AppCompatActivity {
         Bundle b = this.getIntent().getExtras();
         usuario = b.getString("UVUS");
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
