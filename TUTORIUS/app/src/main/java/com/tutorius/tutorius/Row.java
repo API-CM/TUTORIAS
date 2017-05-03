@@ -11,6 +11,8 @@ public class Row
 
     private String disp;    //disponibilidad del profesor ---
 
+    private String cancelada;
+
     private boolean checked;
 
     public String getTitle()
@@ -38,6 +40,16 @@ public class Row
 
     public String getDisp(){return disp;}   //agregado --
     public void setDisp(String disp){this.disp=disp;}   //agregado
+
+    public String getCancelada()
+    {
+        return cancelada;
+    }
+
+    public void setCancelada(String cancelada)
+    {
+        this.cancelada = cancelada;
+    }
 
     public boolean isChecked()
     {

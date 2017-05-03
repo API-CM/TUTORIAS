@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                         else if (resultIntJSON==2){
                             devuelve = " ";
-                            Intent intent = new Intent(MainActivity.this,ModificacionPerfilProfesor.class);
+                            Intent intent = new Intent(MainActivity.this,Profesor.class);
                             Bundle b = new Bundle();
                             b.putString("UVUS",user1);
                             intent.putExtras(b);

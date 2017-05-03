@@ -7,7 +7,10 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:focusable="false"
+        android:clickable="false" />
 
     <TextView
         android:id="@+id/textViewSubtitle"
@@ -16,7 +19,9 @@
         android:layout_alignLeft="@+id/textViewTitle"
         android:layout_below="@+id/textViewTitle"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black"
+        android:focusable="false"
+        android:clickable="false" />
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -26,7 +31,24 @@
         android:layout_toRightOf="@+id/checkBox"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="14dp"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:focusable="false"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/textCancelada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="77dp"
+        android:layout_marginRight="77dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/black"
+        android:textSize="14dp" />
 
 
 </RelativeLayout>
