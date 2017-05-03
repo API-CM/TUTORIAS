@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText password;
     TextView errores;
     String user;
+    Button olvpwd;      //olvida password
     // IP de mi Url
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
     // Rutas de los Web Services
@@ -44,16 +45,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         entrar = (Button)findViewById(R.id.login);
+        olvpwd=(Button) findViewById(R.id.remember_pass);
         usuario = (EditText)findViewById(R.id.uvus);
         password = (EditText)findViewById(R.id.password);
 
         entrar.setOnClickListener(this);
+        olvpwd.setOnClickListener(this);
         errores = (TextView)findViewById(R.id.errores);
         //Ocultamos el logo de loading
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-
-
     }
+
 
     public void onClick(View v) {
         switch (v.getId()){
@@ -65,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String cadenallamada = AUTENTICACION + "?uvus_alumno=" + usuario.getText().toString() + "&password=" + password.getText().toString();
                 hiloconexion.execute(cadenallamada,"1",user);   // Parámetros que recibe doInBackground
                 break;
+            case R.id.remember_pass:
+                //olvidar clave
+                Intent intent = new Intent(MainActivity.this,OlvidaPwd.class);
+                startActivity(intent);
             default:
 
                 break;

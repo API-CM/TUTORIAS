@@ -58,6 +58,9 @@
             android:name=".ListViewAsig"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".OlvidaPwd"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".AlumnoPideCitaProfesor"
             android:screenOrientation="portrait" />
         <activity
