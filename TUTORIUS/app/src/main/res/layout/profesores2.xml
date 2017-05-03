@@ -7,41 +7,48 @@
     android:orientation="vertical"
     tools:context=".Profesores">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listViewProf"
-        android:divider="@android:drawable/button_onoff_indicator_off"
-        android:layout_marginTop="41dp"
-        android:layout_below="@+id/busquedaprof"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <include layout="@layout/activity_cabecera_alumno"/>
 
-    <EditText
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_marginTop="44dp"
-        android:id="@+id/busquedaprof"
-        android:hint="Profesor"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:paddingTop="65dp">
 
-    <Button
-        android:text="@string/search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnbusqprof"
-        android:drawableLeft="@drawable/search"
-        android:drawablePadding="8dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_alignTop="@+id/busquedaprof"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listViewProf"
+            android:divider="@android:drawable/button_onoff_indicator_off"
+            android:layout_marginTop="41dp"
+            android:layout_below="@+id/busquedaprof"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_marginTop="44dp"
+            android:id="@+id/busquedaprof"
+            android:hint="Profesor"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:text="@string/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnbusqprof"
+            android:drawableLeft="@drawable/search"
+            android:drawablePadding="8dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_alignTop="@+id/busquedaprof"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
 </RelativeLayout>
