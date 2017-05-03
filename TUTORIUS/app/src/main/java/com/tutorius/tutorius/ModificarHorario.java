@@ -2,6 +2,7 @@ package com.tutorius.tutorius;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -53,6 +55,12 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
     String[] listaa;
     private Context mContext;
     String disponible1;
+    String diacogido;
+    String getTieneDia;
+    String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
+    String a;
+    String b;
+    String c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,9 +170,9 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
             case R.id.add_franja:
 
 
-                String a = diaSeleccionado();
-                String b = horainicioSeleccionado();
-                String c = horafinSeleccionado();
+                a = diaSeleccionado();
+                b = horainicioSeleccionado();
+                c = horafinSeleccionado();
 
                 DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
@@ -189,9 +197,8 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                 if (fechaFin.after(fechaInicio)) {
 
 
-                    String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
                     // Rutas de los Web Services
-                    getAddHorario = IP + "/getAddHorario.php?uvus_profesor=" + usuario + "&hora_inicio=" + b + "&hora_fin=" + c + "&dia_semana=" + a;
+                    getTieneDia = IP + "/getTieneDia.php?uvus_profesor=" + usuario + "&dia_semana=" + a;
 
                     mContext = getApplicationContext();
 
@@ -200,24 +207,77 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                     // Initialize a new JsonObjectRequest instance
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                             Request.Method.GET,
-                            getAddHorario,
+                            getTieneDia,
                             null,
-                            null, null
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    // Do something with response
+                                    //mTextView.setText(response.toString());
+
+                                    // Process the JSON
+                                    try{
+                                        // Get the JSON array
+                                        JSONArray array = response.getJSONArray("tieneDia");
+
+                                        for(int i=0;i<array.length();i++) {
+                                            // Get current json object
+                                            JSONObject tiene = array.getJSONObject(i);
+
+                                            // Get the current student (json object) data
+                                            diacogido = tiene.getString("COUNT(*)");
+
+                                            if(diacogido.equals("1")){
+                                                Toast toast1 =
+                                                        Toast.makeText(getApplicationContext(),
+                                                                "No se puede tener dos franjas horarias un mismo día", Toast.LENGTH_SHORT);
+                                                toast1.show();
+                                            }else{
+
+                                                // Rutas de los Web Services
+                                                getAddHorario = IP + "/getAddHorario.php?uvus_profesor=" + usuario + "&hora_inicio=" + b + "&hora_fin=" + c + "&dia_semana=" + a;
+
+                                                mContext = getApplicationContext();
+
+                                                RequestQueue requestQueue2 = Volley.newRequestQueue(mContext);
+
+                                                // Initialize a new JsonObjectRequest instance
+                                                JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(
+                                                        Request.Method.GET,
+                                                        getAddHorario,
+                                                        null,
+                                                        null, null
+                                                );
+
+                                                finish();
+                                                startActivity(getIntent());
+
+
+                                                // Add JsonObjectRequest to the RequestQueue
+                                                requestQueue2.add(jsonObjectRequest2);
+                                            }
+
+                                        }
+
+                                    }catch (JSONException e){
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }, null
                     );
+
 
                     // Add JsonObjectRequest to the RequestQueue
                     requestQueue.add(jsonObjectRequest);
 
-                    finish();
-                    startActivity(getIntent());
-
-                    break;
                 }else{
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "La hora final debe ser posterior a la hora de comienzo", Toast.LENGTH_SHORT);
                     toast1.show();
                 }
+
+                break;
             case R.id.delhorario:
                 ArrayList<String> elegidas = new ArrayList<>();
 
