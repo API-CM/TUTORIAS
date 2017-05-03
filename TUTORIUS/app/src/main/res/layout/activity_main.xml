@@ -68,7 +68,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
-        android:id="@+id/errores" />
+        android:id="@+id/errores"
+        android:textColor="@color/colorAccent" />
 
     <Button
         android:text="@string/login"
