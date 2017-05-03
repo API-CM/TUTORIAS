@@ -9,6 +9,8 @@ public class Row
 
     private String id;  //agregado por antonio
 
+    private String cancelada;
+
     private boolean checked;
 
     public String getTitle()
@@ -33,6 +35,16 @@ public class Row
 
     public String getId(){return id;}   //agregado ---
     public void setId(String id){this.id=id;}    //agregado ---
+
+    public String getCancelada()
+    {
+        return cancelada;
+    }
+
+    public void setCancelada(String cancelada)
+    {
+        this.cancelada = cancelada;
+    }
 
     public boolean isChecked()
     {

@@ -5,12 +5,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,11 +38,13 @@ public class ProfesoresHoy extends Fragment
     // IP de mi Url
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
     // Rutas de los Web Services
-    String getProfesor=IP+"/getCitasProfesor.php";
+    String getProfesor=IP+"/getCitasProfesorHoy.php";
 
     String[] listaa;
 
     View rootView;
+
+    Button btnCancelar;
 
     private Context mContext;
     private Activity mActivity;
@@ -56,14 +58,15 @@ public class ProfesoresHoy extends Fragment
 
 
 
-        rootView = inflater.inflate(R.layout.fragment_addpeople, container, false);
+        rootView = inflater.inflate(R.layout.fragment_citas_profesor, container, false);
         listView= (ListView) rootView.findViewById(R.id.listView1);
-        rows = new ArrayList<Row>(30);
+        rows = new ArrayList<Row>();
 
         mContext = getActivity().getApplicationContext();
         mActivity = getActivity();
         mCLayout = (TextView) rootView.findViewById(R.id.errores);
 
+        btnCancelar = (Button)rootView.findViewById(R.id.btnCancelar);
 
 
 
@@ -101,9 +104,12 @@ public class ProfesoresHoy extends Fragment
                             for(int i=0;i<array.length();i++){
                                 // Get current json object
                                 JSONObject row = array.getJSONObject(i);
+
                                 fila = new Row();
                                 fila.setTitle(row.getString("HORA_INICIO") + " ");
                                 fila.setSubtitle(row.getString("FECHA") + " ");
+                                fila.setId(row.getString("ID_RESERVA") + " ");
+                                fila.setCancelada(row.getString("CANCELADA"));
 
 
                                 // Display the formatted json data in text view
@@ -117,7 +123,6 @@ public class ProfesoresHoy extends Fragment
 
 
                             listView.setAdapter(new CustomArrayAdapter(getContext(), rows));
-
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -139,6 +144,52 @@ public class ProfesoresHoy extends Fragment
 
         // Add JsonObjectRequest to the RequestQueue
         requestQueue.add(jsonObjectRequest);
+
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() { //botón para buscar valor
+            public void onClick(View arg0)
+            {
+
+                View v;
+                CheckBox cb;
+                for(int i=0;i < listView.getCount();i++) {
+                    Row item = (Row) listView.getItemAtPosition(i);
+
+                    v = listView.getChildAt(i);
+                    cb = (CheckBox) v.findViewById(R.id.checkBox);
+                    if (cb.isChecked()){
+
+
+                        String cadenallamada = IP + "/getDeleteCitasProfesor.php?id_reserva=" + item.getId();
+
+
+                        // Initialize a new RequestQueue instance
+                        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
+
+                        // Initialize a new JsonObjectRequest instance
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                                Request.Method.GET,
+                                cadenallamada,
+                                null,
+                                null,
+                                null
+                        );
+
+                        // Add JsonObjectRequest to the RequestQueue
+                        requestQueue.add(jsonObjectRequest);
+
+                        getActivity().finish();
+                        startActivity(getActivity().getIntent());
+
+
+                    }
+
+
+                }
+
+
+            }
+        });
 
         return rootView;
     }

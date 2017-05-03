@@ -8,18 +8,16 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Custom adapter - "View Holder Pattern".
- *
- * @author danielme.com
- *
- */
 public class CustomArrayAdapter extends ArrayAdapter<Row> implements
         View.OnClickListener {
 
     private LayoutInflater layoutInflater;
+    ArrayList<String> selectedStrings = new ArrayList<String>();
 
     public CustomArrayAdapter(Context context, List<Row> objects) {
         super(context, 0, objects);
@@ -40,6 +38,8 @@ public class CustomArrayAdapter extends ArrayAdapter<Row> implements
                     .findViewById(R.id.textViewSubtitle));
             holder.setCheckBox((CheckBox) convertView
                     .findViewById(R.id.checkBox));
+            holder.setTextViewCancelada((TextView) convertView
+                    .findViewById(R.id.textCancelada));
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
@@ -51,6 +51,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Row> implements
         holder.getCheckBox().setTag(position);
         holder.getCheckBox().setChecked(row.isChecked());
         holder.getCheckBox().setOnClickListener(this);
+        holder.getTextViewCancelada().setText(row.getCancelada());
+
+        
 
         return convertView;
     }
@@ -63,9 +66,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Row> implements
         int position = (Integer) v.getTag();
         getItem(position).setChecked(checkBox.isChecked());
 
-        String msg = this.getContext().getString(R.string.check_toast,
-                position, checkBox.isChecked())+(position+1);
-        Toast.makeText(this.getContext(), msg, Toast.LENGTH_SHORT).show();
+        /*String msg = this.getContext().getString(R.string.check_toast,
+                position, checkBox.isChecked())+(position+1)+" "+checkBox.isChecked();
+        Toast.makeText(this.getContext(), msg, Toast.LENGTH_SHORT).show();*/
     }
 
     static class Holder
@@ -73,6 +76,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Row> implements
         TextView textViewTitle;
         TextView textViewSubtitle;
         CheckBox checkBox;
+        TextView textCancelada;
 
         public TextView getTextViewTitle()
         {
@@ -100,6 +104,15 @@ public class CustomArrayAdapter extends ArrayAdapter<Row> implements
         public void setCheckBox(CheckBox checkBox)
         {
             this.checkBox = checkBox;
+        }
+
+        public TextView getTextViewCancelada()
+        {
+            return textCancelada;
+        }
+        public void setTextViewCancelada(TextView textViewCancelada)
+        {
+            this.textCancelada = textViewCancelada;
         }
 
     }

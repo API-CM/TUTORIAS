@@ -2,7 +2,6 @@ package com.tutorius.tutorius;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ public class CitasHoyProfesor extends Fragment
                              Bundle savedInstanceState) {
         // TODO Auto-generated method stub
 
-        View rootView = inflater.inflate(R.layout.fragment_addpeople, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_citas_profesor, container, false);
         listView= (ListView) rootView.findViewById(R.id.listView1);
         rows = new ArrayList<Row>(30);
         Row row = null;
