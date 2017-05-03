@@ -19,14 +19,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/siglaDept"
-                android:textSize="21sp" />
+                android:textSize="21sp"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/nombreDept"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
     </LinearLayout>

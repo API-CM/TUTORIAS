@@ -21,13 +21,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/deptProf"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/nombreProf"
-            android:textSize="28sp" />
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
 </RelativeLayout>
