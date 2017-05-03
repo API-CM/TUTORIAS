@@ -46,7 +46,7 @@ public class ListViewAsig extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profesores);
+        setContentView(R.layout.profesores2);
 
         //cabecera
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
