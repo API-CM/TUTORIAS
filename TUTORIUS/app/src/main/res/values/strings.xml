@@ -24,7 +24,7 @@
     <string name="PedirCitaProf">Pedir cita</string>
     <string name="modificarhorario">Modificar Horario</string>
     <string name="modificarasigs">Modificar Asignaturas</string>
-    <string name="addasig">SIGLAS ASIGNATURA</string>
+    <string name="addasig">Siglas Asignaturas</string>
     <string name="addasignatura">Añadir una nueva asignatura:</string>
     <string name="addhorario">Añadir una nueva franja de tutoria</string>
     <string name="dia_semana">Día de la semana:</string>
