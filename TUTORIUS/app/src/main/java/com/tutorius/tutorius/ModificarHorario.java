@@ -52,6 +52,7 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
     List<Row> rows;
     String[] listaa;
     private Context mContext;
+    String disponible1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,7 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
         email = b.getString("EMAIL");
         despacho = b.getString("DESPACHO");
         departamento = b.getString("DEPARTAMENTO");
+        disponible1 = b.getString("DISPONIBILIDAD");
 
 
         dia = (Spinner) findViewById(R.id.dia_semana);
@@ -305,6 +307,7 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                 b.putString("EMAIL",email);
                 b.putString("DESPACHO",despacho);
                 b.putString("DEPARTAMENTO",departamento);
+                b.putString("DISPONIBILIDAD",disponible1);
                 intent.putExtras(b);
                 startActivity(intent);
                 return true;

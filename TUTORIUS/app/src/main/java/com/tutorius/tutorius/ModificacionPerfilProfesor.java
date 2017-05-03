@@ -276,25 +276,24 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
+        Bundle b = new Bundle();
 
         switch(id) {
 
             case R.id.action_settings_back:
-               /* Intent intent = new Intent(ModificacionPerfilProfesor.this, MainActivity.class);
+
+                Intent intent = new Intent(ModificacionPerfilProfesor.this, Profesor.class);
+                b.putString("UVUS",usuario);
+                intent.putExtras(b);
                 startActivity(intent);
-                return true;
-                */
-                finish();
-                startActivity(getIntent());
                 return true;
 
             case R.id.action_settings_home:
-            /*    Intent intent2 = new Intent(ModificacionPerfilProfesor.this, MainActivity.class);
+
+                Intent intent2 = new Intent(ModificacionPerfilProfesor.this, Profesor.class);
+                b.putString("UVUS",usuario);
+                intent2.putExtras(b);
                 startActivity(intent2);
-                return true;
-                */
-                finish();
-                startActivity(getIntent());
                 return true;
 
             case R.id.action_settings_profile:

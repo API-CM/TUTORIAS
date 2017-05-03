@@ -132,6 +132,7 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
                 b2.putString("DEPARTAMENTO",departamento);
                 b2.putString("EMAIL",email);
                 b2.putString("DESPACHO",despacho);
+                b2.putString("DISPONIBILIDAD",disponible1);
                 intent2.putExtras(b2);
                 startActivity(intent2);
                 break;
@@ -143,6 +144,7 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
                 b3.putString("DEPARTAMENTO",departamento);
                 b3.putString("EMAIL",email);
                 b3.putString("DESPACHO",despacho);
+                b3.putString("DISPONIBILIDAD",disponible1);
                 intent3.putExtras(b3);
                 startActivity(intent3);
                 break;

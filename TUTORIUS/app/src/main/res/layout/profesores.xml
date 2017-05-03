@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context=".Profesores">
 
+    <include layout="@layout/activity_cabecera_alumno"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

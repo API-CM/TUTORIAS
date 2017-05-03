@@ -49,6 +49,7 @@ public class ModificarAsignaturas extends AppCompatActivity implements View.OnCl
     List<Row> rows;
     String[] listaa;
     private Context mContext;
+    String disponible1;
 
 
 
@@ -69,6 +70,7 @@ public class ModificarAsignaturas extends AppCompatActivity implements View.OnCl
         email = b.getString("EMAIL");
         despacho = b.getString("DESPACHO");
         departamento = b.getString("DEPARTAMENTO");
+        disponible1 = b.getString("DISPONIBILIDAD");
         añadir = (Button)findViewById(R.id.add);
         eliminar = (Button)findViewById(R.id.delete);
         asig = (EditText)findViewById(R.id.nom_asig);
@@ -244,6 +246,7 @@ public class ModificarAsignaturas extends AppCompatActivity implements View.OnCl
                 b.putString("EMAIL",email);
                 b.putString("DESPACHO",despacho);
                 b.putString("DEPARTAMENTO",departamento);
+                b.putString("DISPONIBILIDAD",disponible1);
                 intent.putExtras(b);
                 startActivity(intent);
                 return true;
@@ -277,10 +280,5 @@ public class ModificarAsignaturas extends AppCompatActivity implements View.OnCl
 
         return super.onOptionsItemSelected(item);
     }
-    //
-
-    //nombre = b.getString("NOMBRE");
-    //departamento = b.getString("DEPARTAMENTO");
-    //email = b.getString("EMAIL");
-    //despacho = b.getString("DESPACHO");
+    
 }
