@@ -1,16 +1,31 @@
 package com.tutorius.tutorius;
 
+        import android.content.Context;
         import android.content.Intent;
         import android.os.Bundle;
+        import android.support.design.widget.FloatingActionButton;
+        import android.support.design.widget.Snackbar;
         import android.support.design.widget.TabLayout;
         import android.support.v4.app.Fragment;
         import android.support.v4.app.FragmentManager;
         import android.support.v4.app.FragmentPagerAdapter;
+        import android.support.v4.content.ContextCompat;
         import android.support.v4.view.ViewPager;
         import android.support.v7.app.AppCompatActivity;
         import android.support.v7.widget.Toolbar;
         import android.view.Menu;
         import android.view.MenuItem;
+        import android.view.View;
+
+        import com.android.volley.Request;
+        import com.android.volley.RequestQueue;
+        import com.android.volley.Response;
+        import com.android.volley.toolbox.JsonObjectRequest;
+        import com.android.volley.toolbox.Volley;
+
+        import org.json.JSONArray;
+        import org.json.JSONException;
+        import org.json.JSONObject;
 
         import java.util.ArrayList;
         import java.util.List;
@@ -21,6 +36,11 @@ public class Profesor extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     String usuario;
+    private Context mContext;
+    String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
+    // Rutas de los Web Services
+    String getProfesor=IP+"/getProfesores.php";
+    String dispo2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +58,83 @@ public class Profesor extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        mContext = getApplicationContext();
+
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.refresh);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*Snackbar.make(view, "Se presionó el FAB", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+
+                // Rutas de los Web Services
+                String getUpdate2 = IP+"/getUpdateProfesorStatus.php?uvus_profesor=" + usuario  + "&disponibilidad=" + dispo2;
+
+
+                RequestQueue requestQueue2 = Volley.newRequestQueue(mContext);
+
+                // Initialize a new JsonObjectRequest instance
+                JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(
+                        Request.Method.GET,
+                        getUpdate2,
+                        null,
+                        null,null
+                );
+
+                // Add JsonObjectRequest to the RequestQueue
+                requestQueue2.add(jsonObjectRequest2);
+
+                finish();
+                startActivity(getIntent());
+
+            }
+
+
+        });
+
+        String cadenallamada = getProfesor + "?uvus_profesor=" + usuario;
+        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
+
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                cadenallamada,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+                            // Get the JSON array
+                            JSONArray array = response.getJSONArray("profesor");
+
+                            for(int i=0;i<array.length();i++){
+                                // Get current json object
+                                JSONObject profesor = array.getJSONObject(i);
+
+                                dispo2 = profesor.getString("DISPONIBILIDAD");
+
+                                if(dispo2.equals("0")){
+                                    fab.setImageResource(R.drawable.down);
+                                }else{
+                                    fab.setImageResource(R.drawable.up);
+                                }
+                    }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },null
+        );
+
+        // Add JsonObjectRequest to the RequestQueue
+        requestQueue.add(jsonObjectRequest);
+
+
+
+
     }
 
     private void setupViewPager(ViewPager viewPager) {

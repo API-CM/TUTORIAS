@@ -44,7 +44,6 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
     EditText mail;
     EditText despa;
     TextView nombreT;
-    Switch dispo;
     String disponible1;
 
     @Override
@@ -61,7 +60,6 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
         mail = (EditText) findViewById(R.id.email);
         despa = (EditText) findViewById(R.id.despacho);
         nombreT = (TextView) findViewById(R.id.name);
-        dispo = (Switch)findViewById(R.id.disponibilidad);
 
         Bundle b = this.getIntent().getExtras();
         usuario = b.getString("UVUS");
@@ -71,11 +69,7 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
         departamento = b.getString("DEPARTAMENTO");
         disponible1 = b.getString("DISPONIBILIDAD");
 
-        if(disponible1.equals("ON")){
-            dispo.setChecked(true);
-        }else{
-            dispo.setChecked(false);
-        }
+
 
         actualizar = (Button) findViewById(R.id.update);
         modasig = (Button) findViewById(R.id.modificarasigs);
@@ -99,7 +93,7 @@ public class EditarPerfilProfesor extends AppCompatActivity implements View.OnCl
                 mContext = getApplicationContext();
                 String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
                 // Rutas de los Web Services
-                String getUpdate = IP+"/getUpdateProfesor.php?uvus_profesor=" + usuario +"&departamento=" + depar.getText() + "&despacho="+ despa.getText() + "&email="+mail.getText() + "&disponibilidad=" + dispo.isChecked();
+                String getUpdate = IP+"/getUpdateProfesor.php?uvus_profesor=" + usuario +"&departamento=" + depar.getText() + "&despacho="+ despa.getText() + "&email="+mail.getText();
 
 
                 RequestQueue requestQueue = Volley.newRequestQueue(mContext);

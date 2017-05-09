@@ -117,28 +117,6 @@
         android:layout_alignLeft="@+id/textView12"
         android:layout_alignStart="@+id/textView12" />
 
-        <Switch
-            android:text="@string/disponibilidad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/disponibilidad"
-            android:layout_below="@+id/despacho"
-            android:layout_alignLeft="@+id/despacho"
-            android:layout_alignStart="@+id/despacho"
-            android:layout_marginTop="11dp" />
-
-        <Button
-            android:text="@string/modificarasigs"
-            android:layout_width="wrap_content"
-            android:drawableLeft="@drawable/editar2"
-            android:drawablePadding="8dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/modificarasigs"
-            android:layout_above="@+id/errores"
-            android:layout_alignLeft="@+id/disponibilidad"
-            android:layout_alignStart="@+id/disponibilidad"
-            android:layout_marginBottom="20dp" />
-
         <Button
             android:text="@string/modificarhorario"
             android:layout_width="wrap_content"
@@ -150,6 +128,18 @@
             android:layout_alignBottom="@+id/modificarasigs"
             android:layout_alignRight="@+id/name"
             android:layout_alignEnd="@+id/name" />
+
+        <Button
+            android:text="@string/modificarasigs"
+            android:layout_width="wrap_content"
+            android:drawableLeft="@drawable/editar2"
+            android:drawablePadding="8dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/modificarasigs"
+            android:layout_marginBottom="20dp"
+            android:layout_above="@+id/errores"
+            android:layout_alignRight="@+id/errores"
+            android:layout_alignEnd="@+id/errores" />
 
     </RelativeLayout>
 
