@@ -62,7 +62,7 @@ public class Profesor extends AppCompatActivity {
         mContext = getApplicationContext();
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.refresh);
+        fab.setImageDrawable(ContextCompat.getDrawable(Profesor.this, R.drawable.refresh));
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,9 +117,9 @@ public class Profesor extends AppCompatActivity {
                                 dispo2 = profesor.getString("DISPONIBILIDAD");
 
                                 if(dispo2.equals("0")){
-                                    fab.setImageResource(R.drawable.down);
+                                    fab.setImageDrawable(ContextCompat.getDrawable(Profesor.this, R.drawable.down));
                                 }else{
-                                    fab.setImageResource(R.drawable.up);
+                                    fab.setImageDrawable(ContextCompat.getDrawable(Profesor.this, R.drawable.up));
                                 }
                     }
                         }catch (JSONException e){
