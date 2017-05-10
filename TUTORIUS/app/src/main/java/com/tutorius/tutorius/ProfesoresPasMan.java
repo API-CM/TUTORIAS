@@ -155,7 +155,7 @@ public class ProfesoresPasMan extends Fragment{
                 //String itemValue = (String) li.getItemAtPosition(position);
                 CheckBox cb = (CheckBox)view.findViewById(R.id.checkBox);
                 cb.setChecked(!cb.isChecked());
-                Toast.makeText(getActivity(), "Click item", Toast.LENGTH_SHORT).show();
+
 
 
             }
