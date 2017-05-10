@@ -145,6 +145,20 @@ public class ProfesoresHoy extends Fragment
         // Add JsonObjectRequest to the RequestQueue
         requestQueue.add(jsonObjectRequest);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // La posición donde se hace clic en el elemento de lista se obtiene de la
+                // la posición de parámetro de la vista de lista de Android
+
+                //obtengo el valor del string del elemento donde se hizo clic
+                //String itemValue = (String) li.getItemAtPosition(position);
+                CheckBox cb = (CheckBox)view.findViewById(R.id.checkBox);
+                cb.setChecked(!cb.isChecked());
+
+            }
+        });
 
         btnCancelar.setOnClickListener(new View.OnClickListener() { //botón para buscar valor
             public void onClick(View arg0)
@@ -177,6 +191,8 @@ public class ProfesoresHoy extends Fragment
 
                         // Add JsonObjectRequest to the RequestQueue
                         requestQueue.add(jsonObjectRequest);
+
+
 
                         getActivity().finish();
                         startActivity(getActivity().getIntent());
