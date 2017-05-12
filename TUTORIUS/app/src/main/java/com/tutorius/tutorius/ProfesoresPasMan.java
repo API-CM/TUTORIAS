@@ -31,15 +31,12 @@ import java.util.List;
 
 public class ProfesoresPasMan extends Fragment{
     ListView listView;
-    List<String> names= new ArrayList<String>();
     List<Row> rows;
     String usuario;
     // IP de mi Url
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
     // Rutas de los Web Services
     String getProfesor=IP+"/getCitasProfesorPasMan.php";
-
-    String[] listaa;
 
     View rootView;
 
@@ -94,10 +91,6 @@ public class ProfesoresPasMan extends Fragment{
                         try{
                             // Get the JSON array
                             JSONArray array = response.getJSONArray("citas");
-
-
-
-                            listaa = new String[array.length()];
                             rows = new ArrayList<Row>();
                             Row fila = null;
                             for(int i=0;i<array.length();i++){
