@@ -98,15 +98,8 @@ public class ModificarAsignaturas extends AppCompatActivity implements View.OnCl
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        // Do something with response
-                        //mTextView.setText(response.toString());
-
-                        // Process the JSON
                         try{
-                            // Get the JSON array
                             JSONArray array = response.getJSONArray("asignaturas");
-
-
 
                             listaa = new String[array.length()];
                             rows = new ArrayList<Row>();
@@ -117,19 +110,11 @@ public class ModificarAsignaturas extends AppCompatActivity implements View.OnCl
                                 fila = new Row();
                                 fila.setTitle(row.getString("NOMBRE"));
 
-
-                                // Display the formatted json data in text view
-
                                 rows.add(fila);
-
                             }
 
-
                             lista= (ListView) findViewById(R.id.list_asigs);
-
-
                             lista.setAdapter(new CustomArrayAdapter(mContext, rows));
-
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -206,10 +191,6 @@ public class ModificarAsignaturas extends AppCompatActivity implements View.OnCl
 
                 finish();
                 startActivity(getIntent());
-
-
-
-
 
                 break;
             default:

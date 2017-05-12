@@ -1,6 +1,6 @@
 package com.tutorius.tutorius;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import java.util.Calendar;
@@ -14,22 +14,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
 
 public class Pedir_hora extends AppCompatActivity {
 
@@ -50,8 +46,6 @@ public class Pedir_hora extends AppCompatActivity {
 
 
     private Context mContext;
-    private Activity mActivity;
-    private TextView mCLayout;
 
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
 
@@ -72,8 +66,6 @@ public class Pedir_hora extends AppCompatActivity {
         datos_cita =b.getString("DIA_CITA");
 
         mContext = getApplicationContext();
-        mActivity = Pedir_hora.this;
-        mCLayout = (TextView) findViewById(R.id.errores);
 
         String[] datos = datos_cita.split(" ");
         dia_semana = datos[0];
@@ -93,24 +85,17 @@ public class Pedir_hora extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        // Do something with response
-                        //mTextView.setText(response.toString());
 
-                        // Process the JSON
                         try{
-                            // Get the JSON array
+
                             JSONArray array = response.getJSONArray("horas");
 
                             listaa = new String[array.length()];
                             for(int i=0;i<array.length();i++) {
-                                // Get current json object
                                 JSONObject hora = array.getJSONObject(i);
-
                                 hora_inicio = hora.getString("HORA_INICIO");
                                 hora_fin = hora.getString("HORA_FIN");
-
                             }
-
 
                             Date hora_in = null;
                             Date hora_fi = null;

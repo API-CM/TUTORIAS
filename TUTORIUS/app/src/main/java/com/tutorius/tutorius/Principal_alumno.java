@@ -35,8 +35,6 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
     String usuario;
     String despacho;
     private Context mContext;
-    private Activity mActivity;
-    private TextView mCLayout;
     ListView listacitas;
     String[] listaa;
     String IP = "http://ec2-52-39-181-148.us-west-2.compute.amazonaws.com";
@@ -59,9 +57,6 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
 
         //-----------------
         mContext = getApplicationContext();
-        mActivity = Principal_alumno.this;
-        mCLayout = (TextView) findViewById(R.id.errores);
-
         Bundle b = this.getIntent().getExtras();
         usuario = b.getString("UVUS");
 
@@ -78,27 +73,19 @@ public class Principal_alumno extends AppCompatActivity implements View.OnClickL
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        // Do something with response
-                        //mTextView.setText(response.toString());
 
-                        // Process the JSON
                         try{
-                            // Get the JSON array
                             JSONArray array = response.getJSONArray("citas");
-                         // JSONArray array2 = response.getJSONArray("despacho");
 
                             listaa = new String[array.length()];
                             for(int i=0;i<array.length();i++){
-                                // Get current json object
                                 JSONObject cita = array.getJSONObject(i);
-                              //JSONObject despa = array2.getJSONObject(i);
 
                                 String fecha = cita.getString("FECHA");
                                 String hora = cita.getString("HORA_INICIO");
                                 String id_reserva = cita.getString("ID_RESERVA");
                                 String cancelado = cita.getString("CANCELADA");
 
-                                // Display the formatted json data in text view
                                 if(!(cancelado.equals("CANCELADA"))){
                                     cancelado=" ";
                                 }

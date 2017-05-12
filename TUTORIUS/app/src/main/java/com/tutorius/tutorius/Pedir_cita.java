@@ -40,8 +40,6 @@ public class Pedir_cita extends AppCompatActivity {
     String profesor;
 
     private Context mContext;
-    private Activity mActivity;
-    private TextView mCLayout;
 
     Integer numcitas = 0;
 
@@ -68,18 +66,12 @@ public class Pedir_cita extends AppCompatActivity {
         profesor = b.getString("UVUS_PROFESOR");
         usuario=b.getString("UVUS");
 
-
-
         mContext = getApplicationContext();
-        mActivity = Pedir_cita.this;
-        mCLayout = (TextView) findViewById(R.id.errores);
 
         String cadenallamada =  IP + "/getDiasCitasProf.php?uvus_profesor=" + profesor;
 
-        // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
-        // Initialize a new JsonObjectRequest instance
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 cadenallamada,
@@ -87,20 +79,13 @@ public class Pedir_cita extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        // Do something with response
-                        //mTextView.setText(response.toString());
 
-                        // Process the JSON
                         try{
-                            // Get the JSON array
                             JSONArray array = response.getJSONArray("dias");
-                            // JSONArray array2 = response.getJSONArray("despacho");
 
                             listaa = new String[array.length()];
                             for(int i=0;i<array.length();i++){
-                                // Get current json object
                                 JSONObject dias = array.getJSONObject(i);
-                                //JSONObject despa = array2.getJSONObject(i);
 
                                 String dia = dias.getString("DIA_SEMANA");
 
@@ -116,8 +101,6 @@ public class Pedir_cita extends AppCompatActivity {
                                 Date fechaActual = new Date();
                                 SimpleDateFormat apptivaWeb = new SimpleDateFormat("dd-MM-yyyy");
                                 String res = apptivaWeb.format(fechaActual);
-
-
 
 
                                     //VER EL DIA QUE ES EL DIA Y SI ES POSTERIOR AL DIA DE LA SEMANA QUE ES HOY AÑADIRLO CON LA FECHA

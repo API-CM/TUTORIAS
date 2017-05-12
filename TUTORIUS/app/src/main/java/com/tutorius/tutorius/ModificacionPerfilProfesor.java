@@ -129,22 +129,15 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        // Do something with response
-                        //mTextView.setText(response.toString());
 
-                        // Process the JSON
                         try{
-                            // Get the JSON array
                             JSONArray array = response.getJSONArray("profesor");
                             JSONArray array2 = response.getJSONArray("asignaturas");
                             JSONArray array3 = response.getJSONArray("horario");
 
-                            // Loop through the array elements
                             for(int i=0;i<array.length();i++){
-                                // Get current json object
                                 JSONObject profesor = array.getJSONObject(i);
 
-                                // Get the current student (json object) data
                                 String firstName = profesor.getString("NOMBRE");
                                 String lastName = profesor.getString("APELLIDO1");
                                 String mail = profesor.getString("EMAIL");
@@ -155,7 +148,6 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
 
 
 
-                                // Display the formatted json data in text view
                                 if(dispo2.equals("0")){
                                     dispo.setText("OFF");
                                 }else{
@@ -181,12 +173,6 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
                                             }, 0, 0, null, null);
                                     colaPeticiones.add(peticion);
                                 }
-
-
-
-
-
-
                             }
 
                             listaa = new String[array2.length()];
@@ -194,18 +180,11 @@ public class ModificacionPerfilProfesor extends AppCompatActivity implements Vie
                                 // Get current json object
                                 JSONObject asig = array2.getJSONObject(i);
 
-
-                                // Display the formatted json data in text view
-
                                 listaa[i] = asig.getString("NOMBRE") + " ";
 
                             }
 
-
                             ponerenlistView(listaa);
-
-
-
 
                             for(int i=0;i<array3.length();i++){
                                 // Get current json object

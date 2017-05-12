@@ -128,10 +128,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         int resultIntJSON = Integer.parseInt(resultJSON);
 
                         if(resultIntJSON == 1){
-                        //if (resultJSON.contentEquals("1")){      // hay un alumno por lo tanto el login es correcto.
-                            //PASAMOS A LA HOJA DE ALUMNOS
-                            //Intent intent = new Intent(MainActivity.this,Alumnos.class);
-                            //startActivity(intent);
                             devuelve = " ";
                             Intent intent = new Intent(MainActivity.this,Principal_alumno.class);
                             Bundle b = new Bundle();
@@ -180,7 +176,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             errores.setText(s);
             //Ponemos el logo de cargando en modo invisible.
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-            //super.onPostExecute(s);
         }
 
         @Override

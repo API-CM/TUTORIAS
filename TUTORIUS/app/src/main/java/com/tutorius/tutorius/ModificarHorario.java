@@ -116,15 +116,8 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        // Do something with response
-                        //mTextView.setText(response.toString());
-
-                        // Process the JSON
                         try{
-                            // Get the JSON array
                             JSONArray array = response.getJSONArray("horario");
-
-
 
                             listaa = new String[array.length()];
                             rows = new ArrayList<Row>();
@@ -138,19 +131,13 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                                 String hora_fin = row.getString("HORA_FIN");
                                 fila.setTitle(dia + " - " + hora_ini + " - " + hora_fin);
 
-
-                                // Display the formatted json data in text view
-
                                 rows.add(fila);
 
                             }
 
-
                             lista_horario= (ListView) findViewById(R.id.list_horario);
 
-
                             lista_horario.setAdapter(new CustomArrayAdapter(mContext, rows));
-
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -212,19 +199,13 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    // Do something with response
-                                    //mTextView.setText(response.toString());
 
-                                    // Process the JSON
                                     try{
-                                        // Get the JSON array
                                         JSONArray array = response.getJSONArray("tieneDia");
 
                                         for(int i=0;i<array.length();i++) {
-                                            // Get current json object
                                             JSONObject tiene = array.getJSONObject(i);
 
-                                            // Get the current student (json object) data
                                             diacogido = tiene.getString("COUNT(*)");
 
                                             if(diacogido.equals("1")){
@@ -234,29 +215,22 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                                                 toast1.show();
                                             }else{
 
-                                                // Rutas de los Web Services
                                                 getAddHorario = IP + "/getAddHorario.php?uvus_profesor=" + usuario + "&hora_inicio=" + b + "&hora_fin=" + c + "&dia_semana=" + a;
-
                                                 mContext = getApplicationContext();
-
                                                 RequestQueue requestQueue2 = Volley.newRequestQueue(mContext);
 
-                                                // Initialize a new JsonObjectRequest instance
                                                 JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(
                                                         Request.Method.GET,
                                                         getAddHorario,
                                                         null,
                                                         null, null
                                                 );
-
                                                 finish();
                                                 startActivity(getIntent());
-
 
                                                 // Add JsonObjectRequest to the RequestQueue
                                                 requestQueue2.add(jsonObjectRequest2);
                                             }
-
                                         }
 
                                     }catch (JSONException e){
@@ -315,9 +289,6 @@ public class ModificarHorario extends AppCompatActivity implements View.OnClickL
                     finish();
                     startActivity(getIntent());
                 }
-
-
-
 
                 break;
             default:
