@@ -114,7 +114,6 @@ public class ListViewAsig extends AppCompatActivity {
                 }
                 Intent intent = new Intent(getApplicationContext(), AlumnoPideCitaProfesor.class);
                 Bundle b = new Bundle();
-                //b.putString("CITA",itemValue);
                 b.putString("UVUS",usuario);    //UVUS DEL ALUMNO
                 b.putString("ID",pasar);   //UVUS DEL PROFESOR
                 intent.putExtras(b);
@@ -210,7 +209,6 @@ public class ListViewAsig extends AppCompatActivity {
     private class ImagenAdapter extends BaseAdapter {
         Context contexto;
         LayoutInflater layoutInflater;
-        SmartImageView smartImagenView;
         ImageView imageView;
         TextView nombreProf, depttProf;
 
@@ -238,15 +236,10 @@ public class ListViewAsig extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             ViewGroup viewGroup=(ViewGroup)layoutInflater.inflate(R.layout.profesor_item,null);
-            //smartImagenView=(SmartImageView)viewGroup.findViewById(R.id.imagen2);
             nombreProf=(TextView)viewGroup.findViewById(R.id.nombreProf);
             depttProf=(TextView)viewGroup.findViewById(R.id.deptProf);
 
             imageView=(ImageView)viewGroup.findViewById(R.id.imageDisponibilidad);
-
-            //String urlFinal=""+imagen.get(position).toString;
-            //Rect rect=new Rect(smartImagenView.getLeft(),smartImagenView.getTop(),smartImagenView.getRight(),smartImagenView.getBottom())
-            //smartImagenView.setImageUrl(urlFinal,rect);
 
             nombreProf.setText(nombresProf.get(position).toString());
             depttProf.setText(deptProf.get(position).toString());
@@ -309,5 +302,5 @@ public class ListViewAsig extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    //
+
 }

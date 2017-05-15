@@ -197,15 +197,10 @@ public class ListViewDept extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             ViewGroup viewGroup=(ViewGroup)layoutInflater.inflate(R.layout.profesor_item,null);
-            //smartImagenView=(SmartImageView)viewGroup.findViewById(R.id.imagen2);
             nombreProf=(TextView)viewGroup.findViewById(R.id.nombreProf);
             depttProf=(TextView)viewGroup.findViewById(R.id.deptProf);
 
             imageView=(ImageView)viewGroup.findViewById(R.id.imageDisponibilidad);
-
-            //String urlFinal=""+imagen.get(position).toString;
-            //Rect rect=new Rect(smartImagenView.getLeft(),smartImagenView.getTop(),smartImagenView.getRight(),smartImagenView.getBottom())
-            //smartImagenView.setImageUrl(urlFinal,rect);
 
             nombreProf.setText(nombresProf.get(position).toString());
             depttProf.setText(deptProf.get(position).toString());
@@ -222,27 +217,22 @@ public class ListViewDept extends AppCompatActivity {
     //metodos para el menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main2, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
         Bundle b = new Bundle();
 
-        switch(id) {
+        switch (id) {
 
             case R.id.action_settings_back:
 
                 Intent intent = new Intent(ListViewDept.this, Alumnos.class);
 
-                b.putString("UVUS",usuario);
+                b.putString("UVUS", usuario);
                 intent.putExtras(b);
                 startActivity(intent);
                 return true;
@@ -251,7 +241,7 @@ public class ListViewDept extends AppCompatActivity {
 
                 Intent intent2 = new Intent(ListViewDept.this, Principal_alumno.class);
 
-                b.putString("UVUS",usuario);
+                b.putString("UVUS", usuario);
                 intent2.putExtras(b);
                 startActivity(intent2);
                 return true;
@@ -266,6 +256,5 @@ public class ListViewDept extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    //
 
 }
